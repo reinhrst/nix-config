@@ -482,6 +482,14 @@
       --     lint.try_lint()
       --   end,
       -- })
+
+      -- Highlight yanked text briefly
+      vim.api.nvim_create_autocmd("TextYankPost", {
+        group = vim.api.nvim_create_augroup("highlight_yank", { clear = true }),
+        callback = function()
+          vim.highlight.on_yank({ higroup = "Visual", timeout = 200 })
+        end,
+      })
     '';
 
     # Key mappings
@@ -702,7 +710,7 @@
     # Options
     opts = {
       number = true;
-      relativenumber = true;
+      relativenumber = false;
       tabstop = 2;
       shiftwidth = 2;
       expandtab = true;
