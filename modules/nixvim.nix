@@ -4,9 +4,6 @@
   programs.nixvim = {
     enable = true;
 
-    # Disable documentation generation to avoid warnings
-    enableMan = false;
-
     globals.mapleader = " ";
     globals.maplocalleader = " ";
 
@@ -282,22 +279,38 @@
         grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
           bash
           c
+          c_sharp
+          css
+          csv
+          dockerfile
+          git_config
+          git_rebase
+          gitcommit
+          gitignore
+          go
           html
           javascript
           json
+          latex
           lua
           make
           markdown
           markdown_inline
           nix
+          objc
           python
           query
           regex
+          rst
           rust
+          scss
+          sql
           swift
+          toml
           tsx
           typescript
           vim
+          xml
           yaml
         ];
       };
