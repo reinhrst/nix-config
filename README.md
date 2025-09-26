@@ -1,6 +1,6 @@
 # Home Manager Configuration
 
-This repository contains a system-wide Home Manager configuration.
+This repository contains a system-wide Home Manager configuration for managing development tools and applications.
 
 ## 📁 Structure
 
@@ -11,7 +11,9 @@ home-manager/
 ├── install.sh          # Installation script
 ├── Makefile            # Management commands
 ├── README.md           # This file
-└── shell.nix           # Development shell
+├── shell.nix           # Development shell
+└── modules/
+    └── nixvim.nix      # Neovim configuration
 ```
 
 ## 🚀 Quick Start
@@ -89,19 +91,41 @@ nix flake update && home-manager switch --flake ~/.config/home-manager
 
 ## 📝 Configuration
 
+### Included Packages
+
+This configuration currently includes:
+
+#### Development Tools
+- **Neovim (nixvim)**: Complete IDE setup with:
+  - Gruvbox colorscheme
+  - LSP servers (lua_ls, jsonls)
+  - Telescope + FZF for file navigation
+  - Treesitter syntax highlighting (Swift, Rust, TypeScript, etc.)
+  - nvim-cmp completion with LuaSnip snippets
+  - Lualine statusline
+  - Git integration (gitsigns)
+  - All custom keybindings preserved
+
+_Additional packages will be added over time to reach the goal of 20+ managed applications._
+
 ### Customization
 
-1. **Edit home configuration**:
+1. **Edit Neovim configuration**:
+   ```bash
+   $EDITOR modules/nixvim.nix
+   ```
+
+2. **Edit home configuration**:
    ```bash
    $EDITOR home.nix
    ```
 
-2. **Apply changes**:
+3. **Apply changes**:
    ```bash
    make switch
    ```
 
-3. **Add new programs**: Edit `home.nix` to add more programs managed by Home Manager:
+4. **Add new programs**: Edit `home.nix` to add more programs managed by Home Manager:
 
 ```nix
 {
@@ -174,6 +198,7 @@ make rollback
 ## 📚 Resources
 
 - [Home Manager Manual](https://nix-community.github.io/home-manager/)
+- [Nixvim Documentation](https://nix-community.github.io/nixvim/)
 - [Nix Package Search](https://search.nixos.org/packages)
 - [Home Manager Options](https://nix-community.github.io/home-manager/options.html)
 

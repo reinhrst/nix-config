@@ -1,6 +1,11 @@
 { config, pkgs, ... }:
 
 {
+  # Import modules
+  imports = [
+    ./modules/nixvim.nix
+  ];
+
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
