@@ -3,7 +3,7 @@
 {
   # Import modules
   imports = [
-    ./modules/nixvim.nix
+    ./modules/nixvim
   ];
 
   # Allow specific unfree packages
