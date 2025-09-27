@@ -535,7 +535,31 @@
 
       -- Configure Claude Code
       require("claudecode").setup({
-        -- Configuration will be added here if needed
+        -- Only Claude Code specific keymaps
+        terminal_keymaps = {
+          ["<C-,>"] = "<cmd>ClaudeCodeHide<cr>",
+        }
+      })
+
+      -- Auto-enter insert mode when entering terminal
+      local terminal_group = vim.api.nvim_create_augroup("terminal_auto_insert", { clear = true })
+
+      -- When a new terminal is opened
+      vim.api.nvim_create_autocmd("TermOpen", {
+        group = terminal_group,
+        callback = function()
+          vim.cmd("startinsert")
+        end,
+      })
+
+      -- When entering a terminal buffer (covers window switching)
+      vim.api.nvim_create_autocmd({"BufEnter", "WinEnter"}, {
+        group = terminal_group,
+        callback = function()
+          if vim.bo.buftype == "terminal" then
+            vim.cmd("startinsert")
+          end
+        end,
       })
 
       -- Highlight yanked text briefly
@@ -815,6 +839,56 @@
         key = "<leader>ad";
         action = "<cmd>ClaudeCodeDiffDeny<cr>";
         options.desc = "Deny diff";
+      }
+
+      # Terminal navigation - works in all terminals
+      {
+        mode = "t";
+        key = "<C-w>h";
+        action = "<C-\\><C-n><C-w>h";
+        options.desc = "Go to left window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-w>j";
+        action = "<C-\\><C-n><C-w>j";
+        options.desc = "Go to lower window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-w>k";
+        action = "<C-\\><C-n><C-w>k";
+        options.desc = "Go to upper window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-w>l";
+        action = "<C-\\><C-n><C-w>l";
+        options.desc = "Go to right window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-h>";
+        action = "<C-\\><C-n><C-w>h";
+        options.desc = "Go to left window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-j>";
+        action = "<C-\\><C-n><C-w>j";
+        options.desc = "Go to lower window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-k>";
+        action = "<C-\\><C-n><C-w>k";
+        options.desc = "Go to upper window from terminal";
+      }
+      {
+        mode = "t";
+        key = "<C-l>";
+        action = "<C-\\><C-n><C-w>l";
+        options.desc = "Go to right window from terminal";
       }
 
       # LuaSnip
