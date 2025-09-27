@@ -234,14 +234,35 @@
         };
       };
 
-      # Formatting with conform.nvim (initially disabled, no external tools configured)
+      # Formatting with conform.nvim
       conform-nvim = {
         enable = true;
         settings = {
-          # Empty formatters_by_ft - no external tools configured yet
-          formatters_by_ft = {};
+          formatters_by_ft = {
+            javascript = [ "prettier" ];
+            typescript = [ "prettier" ];
+            javascriptreact = [ "prettier" ];
+            typescriptreact = [ "prettier" ];
+            tsx = [ "prettier" ];
+            jsx = [ "prettier" ];
+            json = [ "prettier" ];
+            jsonc = [ "prettier" ];
+            css = [ "prettier" ];
+            scss = [ "prettier" ];
+            html = [ "prettier" ];
+            markdown = [ "prettier" ];
+            yaml = [ "prettier" ];
+            python = [ "ruff_format" ];
+            lua = [ "stylua" ];
+            sh = [ "shfmt" ];
+            bash = [ "shfmt" ];
+            zsh = [ "shfmt" ];
+            toml = [ "taplo" ];
+            rust = [ "rustfmt" ];
+            go = [ "gofumpt" ];
+          };
 
-          # Disable format on save initially (null disables it)
+          # Disable format on save (only format when explicitly requested)
           format_on_save = null;
 
           # Notify when no formatters available (useful for debugging)
@@ -481,22 +502,27 @@
       nvim-lint
     ];
 
-    # Lua configuration for nvim-lint (initially disabled, no external tools configured)
+    # Lua configuration for nvim-lint (minimal - only tools without LSP coverage)
     extraConfigLua = ''
-      -- Configure nvim-lint with empty linters (no external tools yet)
+      -- Configure nvim-lint for tools without LSP coverage
       local lint = require("lint")
 
-      -- Empty linters_by_ft - no external tools configured yet
-      lint.linters_by_ft = {}
+      -- Only linters that don't have LSP equivalents
+      lint.linters_by_ft = {
+        sh = { "shellcheck" },
+        bash = { "shellcheck" },
+        zsh = { "shellcheck" },
+        dockerfile = { "hadolint" },
+      }
 
-      -- Autocmd for linting (disabled until we add linters)
-      -- local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
-      -- vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-      --   group = lint_augroup,
-      --   callback = function()
-      --     lint.try_lint()
-      --   end,
-      -- })
+      -- Create autocmd for linting
+      local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
+      vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+        group = lint_augroup,
+        callback = function()
+          lint.try_lint()
+        end,
+      })
 
       -- Highlight yanked text briefly
       vim.api.nvim_create_autocmd("TextYankPost", {
@@ -719,6 +745,14 @@
         mode = [ "i" "s" ];
         key = "<S-C-tab>";
         action = "<cmd>lua require('luasnip').jump(-1)<cr>";
+      }
+
+      # Format buffer
+      {
+        mode = "n";
+        key = "<leader>cf";
+        action = "<cmd>lua require('conform').format()<cr>";
+        options.desc = "Format buffer";
       }
     ];
 
