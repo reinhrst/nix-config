@@ -6,6 +6,11 @@
     ./modules/nixvim.nix
   ];
 
+  # Allow specific unfree packages
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
+    "claude-code"
+  ];
+
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;
 
@@ -18,8 +23,11 @@
   # introduces backwards incompatible changes.
   home.stateVersion = "24.05";
 
-  # Install CLI tools for formatting and linting
+  # Install packages
   home.packages = with pkgs; [
+    # Claude Code
+    claude-code
+
     # Formatters (for conform.nvim)
     prettier
     stylua
