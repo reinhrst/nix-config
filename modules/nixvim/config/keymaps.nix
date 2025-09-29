@@ -158,40 +158,40 @@
 
     # Tabs
     {
-      mode = "n";
-      key = "<leader><tab>l";
-      action = "<cmd>tablast<cr>";
-      options.desc = "Last Tab";
+      mode = ["n" "t"];
+      key = "<C-,>";
+      action = "<cmd>tabprevious<cr>";
+      options.desc = "Previous Tab";
+    }
+    {
+      mode = ["n" "t"];
+      key = "<C-.>";
+      action = "<cmd>tabnext<cr>";
+      options.desc = "Next Tab";
+    }
+    {
+      mode = ["n" "t"];
+      key = "<C-S-,>";
+      action = "<cmd>tabmove -1<cr>";
+      options.desc = "Move tab left";
+    }
+    {
+      mode = ["n" "t"];
+      key = "<C-S-.>";
+      action = "<cmd>tabmove +1<cr>";
+      options.desc = "Move tab right";
     }
     {
       mode = "n";
-      key = "<leader><tab>f";
-      action = "<cmd>tabfirst<cr>";
-      options.desc = "First Tab";
-    }
-    {
-      mode = "n";
-      key = "<leader><tab><tab>";
+      key = "<leader>tn";
       action = "<cmd>tabnew<cr>";
       options.desc = "New Tab";
     }
     {
       mode = "n";
-      key = "<leader><tab>]";
-      action = "<cmd>tabnext<cr>";
-      options.desc = "Next Tab";
-    }
-    {
-      mode = "n";
-      key = "<leader><tab>d";
+      key = "<leader>tc";
       action = "<cmd>tabclose<cr>";
       options.desc = "Close Tab";
-    }
-    {
-      mode = "n";
-      key = "<leader><tab>[";
-      action = "<cmd>tabprevious<cr>";
-      options.desc = "Previous Tab";
     }
 
     # Quit

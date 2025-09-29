@@ -80,10 +80,7 @@
 
       -- Configure Claude Code
       require("claudecode").setup({
-        -- Only Claude Code specific keymaps
-        terminal_keymaps = {
-          ["<C-,>"] = "<cmd>ClaudeCodeHide<cr>",
-        }
+        -- Configuration will be added here if needed
       })
     '';
   };
