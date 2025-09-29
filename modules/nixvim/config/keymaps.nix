@@ -295,30 +295,6 @@
       action = "<C-\\><C-n><C-w>l";
       options.desc = "Go to right window from terminal";
     }
-    {
-      mode = "t";
-      key = "<C-h>";
-      action = "<C-\\><C-n><C-w>h";
-      options.desc = "Go to left window from terminal";
-    }
-    {
-      mode = "t";
-      key = "<C-j>";
-      action = "<C-\\><C-n><C-w>j";
-      options.desc = "Go to lower window from terminal";
-    }
-    {
-      mode = "t";
-      key = "<C-k>";
-      action = "<C-\\><C-n><C-w>k";
-      options.desc = "Go to upper window from terminal";
-    }
-    {
-      mode = "t";
-      key = "<C-l>";
-      action = "<C-\\><C-n><C-w>l";
-      options.desc = "Go to right window from terminal";
-    }
 
     # Easy escape from terminal
     {
