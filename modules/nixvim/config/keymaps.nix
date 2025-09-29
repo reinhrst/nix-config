@@ -156,30 +156,58 @@
       options.desc = "Split window right";
     }
 
-    # Tabs
+    # Tabs (normal mode)
     {
-      mode = ["n" "t"];
+      mode = "n";
       key = "<C-,>";
       action = "<cmd>tabprevious<cr>";
       options.desc = "Previous Tab";
     }
     {
-      mode = ["n" "t"];
+      mode = "n";
       key = "<C-.>";
       action = "<cmd>tabnext<cr>";
       options.desc = "Next Tab";
     }
     {
-      mode = ["n" "t"];
+      mode = "n";
       key = "<C-S-,>";
       action = "<cmd>tabmove -1<cr>";
       options.desc = "Move tab left";
     }
     {
-      mode = ["n" "t"];
+      mode = "n";
       key = "<C-S-.>";
       action = "<cmd>tabmove +1<cr>";
       options.desc = "Move tab right";
+    }
+
+    # Tabs from terminal mode (exit terminal mode first)
+    {
+      mode = "t";
+      key = "<C-,>";
+      action = "<C-\\><C-n><cmd>tabprevious<cr>";
+      options.desc = "Previous Tab";
+    }
+    {
+      mode = "t";
+      key = "<C-.>";
+      action = "<C-\\><C-n><cmd>tabnext<cr>";
+      options.desc = "Next Tab";
+    }
+
+    # Tabs from insert mode (exit insert mode first)
+    {
+      mode = "i";
+      key = "<C-,>";
+      action = "<Esc><cmd>tabprevious<cr>";
+      options.desc = "Previous Tab";
+    }
+    {
+      mode = "i";
+      key = "<C-.>";
+      action = "<Esc><cmd>tabnext<cr>";
+      options.desc = "Next Tab";
     }
     {
       mode = "n";
