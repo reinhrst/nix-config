@@ -2,23 +2,45 @@
 
 {
   programs.nixvim.extraConfigLua = ''
-    -- Auto-enter insert mode when entering terminal
-    local terminal_group = vim.api.nvim_create_augroup("terminal_auto_insert", { clear = true })
+    -- Terminal background highlighting based on mode
+    local terminal_group = vim.api.nvim_create_augroup("terminal_visual_mode", { clear = true })
 
-    -- When a new terminal is opened
-    vim.api.nvim_create_autocmd("TermOpen", {
-      group = terminal_group,
-      callback = function()
-        vim.cmd("startinsert")
-      end,
-    })
-
-    -- When entering a terminal buffer (covers window switching)
-    vim.api.nvim_create_autocmd({"BufEnter", "WinEnter"}, {
+    -- Set terminal background when entering terminal in normal mode
+    vim.api.nvim_create_autocmd({"TermEnter", "BufEnter"}, {
       group = terminal_group,
       callback = function()
         if vim.bo.buftype == "terminal" then
-          vim.cmd("startinsert")
+          -- Use theme's CursorLine color for subtle distinction
+          vim.cmd("highlight link TerminalNormal CursorLine")
+          vim.wo.winhighlight = "Normal:TerminalNormal"
+        end
+      end,
+    })
+
+    -- Clear terminal background highlighting when entering insert mode
+    vim.api.nvim_create_autocmd("TermLeave", {
+      group = terminal_group,
+      callback = function()
+        if vim.bo.buftype == "terminal" then
+          -- Reset to normal background
+          vim.wo.winhighlight = ""
+        end
+      end,
+    })
+
+    -- Also handle mode changes within terminal
+    vim.api.nvim_create_autocmd("ModeChanged", {
+      group = terminal_group,
+      callback = function()
+        if vim.bo.buftype == "terminal" then
+          if vim.fn.mode() == "t" then
+            -- Insert mode in terminal - normal background
+            vim.wo.winhighlight = ""
+          else
+            -- Normal mode in terminal - use theme's CursorLine color
+            vim.cmd("highlight link TerminalNormal CursorLine")
+            vim.wo.winhighlight = "Normal:TerminalNormal"
+          end
         end
       end,
     })

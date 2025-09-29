@@ -320,6 +320,14 @@
       options.desc = "Go to right window from terminal";
     }
 
+    # Easy escape from terminal
+    {
+      mode = "t";
+      key = "<C-Esc>";
+      action = "<C-\\><C-n>";
+      options.desc = "Exit terminal mode";
+    }
+
     # LuaSnip
     {
       mode = [ "s" "i" ];
