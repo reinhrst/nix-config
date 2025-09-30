@@ -13,6 +13,9 @@
           -- Use theme's CursorLine color for subtle distinction
           vim.cmd("highlight link TerminalNormal CursorLine")
           vim.wo.winhighlight = "Normal:TerminalNormal"
+        else
+          -- Clear terminal highlighting for non-terminal buffers
+          vim.wo.winhighlight = ""
         end
       end,
     })
