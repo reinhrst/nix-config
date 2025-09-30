@@ -86,6 +86,23 @@
       zstyle ':fzf-tab:*' fzf-bindings 'tab:accept' 'shift-tab:backward-char' 'enter:ignore'
       # Continuous tab completion - cycle through options
       zstyle ':fzf-tab:*' continuous-trigger 'tab'
+
+      # Aliases
+      alias ez='eza -la'
+
+      # Empty prompt enter behavior
+      magic-enter() {
+        if [[ -z $BUFFER ]]; then
+          LBUFFER="echo && eza -la && if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo; echo; git status -s; fi"
+          zle accept-line
+        else
+          zle accept-line
+        fi
+      }
+      zle -N magic-enter
+
+      # Bind Enter key to magic-enter function
+      bindkey '^M' magic-enter
     '';
   };
 }
