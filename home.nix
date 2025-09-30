@@ -69,5 +69,6 @@
     eza
     bat
     ripgrep
+    dust
   ];
 }
