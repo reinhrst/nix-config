@@ -50,5 +50,6 @@
     bat
     delta
     jq
+    eza
   ];
 }
