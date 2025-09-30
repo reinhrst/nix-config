@@ -76,6 +76,16 @@
       # Shift+Up/Down for history search with current input
       bindkey '^[[1;2A' history-beginning-search-backward
       bindkey '^[[1;2B' history-beginning-search-forward
+
+      # fzf-tab configuration
+      # Auto-complete unique prefixes before showing fzf
+      zstyle ':fzf-tab:*' prefix-length 1
+      # Don't show fzf if there's only one match
+      zstyle ':fzf-tab:*' single-group ""
+      # Key bindings for fzf-tab
+      zstyle ':fzf-tab:*' fzf-bindings 'tab:accept' 'shift-tab:backward-char' 'enter:ignore'
+      # Continuous tab completion - cycle through options
+      zstyle ':fzf-tab:*' continuous-trigger 'tab'
     '';
   };
 }
