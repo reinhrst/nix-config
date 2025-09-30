@@ -4,6 +4,10 @@
   # Import modules
   imports = [
     ./modules/nixvim
+    ./modules/zsh.nix
+    ./modules/fzf.nix
+    ./modules/starship.nix
+    ./modules/atuin.nix
   ];
 
   # Allow specific unfree packages
