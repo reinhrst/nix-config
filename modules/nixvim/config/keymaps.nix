@@ -351,5 +351,28 @@
       action = "<cmd>lua require('conform').format()<cr>";
       options.desc = "Format buffer";
     }
+
+    # System clipboard keymaps
+    # Copy to system clipboard
+    {
+      mode = [ "n" "v" ];
+      key = "<leader>y";
+      action = "\"+y";
+      options.desc = "Yank to system clipboard";
+    }
+
+    # Paste from system clipboard
+    {
+      mode = [ "n" "v" ];
+      key = "<leader>p";
+      action = "\"+p";
+      options.desc = "Paste from system clipboard";
+    }
+    {
+      mode = [ "n" "v" ];
+      key = "<leader>P";
+      action = "\"+P";
+      options.desc = "Paste before from system clipboard";
+    }
   ];
 }

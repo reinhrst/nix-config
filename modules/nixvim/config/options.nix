@@ -16,7 +16,7 @@
     background = "dark";
     signcolumn = "yes";
     backspace = "indent,eol,start";
-    clipboard = "unnamedplus";
+    # clipboard = "unnamedplus";  # Disabled - use explicit keymaps for system clipboard
     splitright = true;
     splitbelow = true;
     swapfile = false;
