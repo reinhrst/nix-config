@@ -61,6 +61,10 @@
       # Faster ESC key response for vi-mode
       export KEYTIMEOUT=1
 
+      # Allow backspacing past insert start in vi insert mode
+      bindkey -M viins '^?' backward-delete-char
+      bindkey -M viins '^H' backward-delete-char
+
       # q in vi command mode pushes current line to buffer
       bindkey -M vicmd "q" push-line
 
