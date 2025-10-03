@@ -33,15 +33,6 @@
           sha256 = "sha256-GFHlZjIHUWwyeVoCpszgn4AmLPSSE8UVNfRmisnhkpg=";
         };
       }
-      {
-        name = "fzf-tab";
-        src = pkgs.fetchFromGitHub {
-          owner = "Aloxaf";
-          repo = "fzf-tab";
-          rev = "v1.1.2";
-          sha256 = "sha256-Qv8zAiMtrr67CbLRrFjGaPzFZcOiMVEFLg1Z+N6VMhg=";
-        };
-      }
     ];
 
     # Environment variables and key bindings
@@ -77,15 +68,45 @@
       bindkey '^[[1;2A' history-beginning-search-backward
       bindkey '^[[1;2B' history-beginning-search-forward
 
-      # fzf-tab configuration
-      # Auto-complete unique prefixes before showing fzf
-      zstyle ':fzf-tab:*' prefix-length 1
-      # Don't show fzf if there's only one match
-      zstyle ':fzf-tab:*' single-group ""
-      # Key bindings for fzf-tab
-      zstyle ':fzf-tab:*' fzf-bindings 'tab:accept' 'shift-tab:backward-char' 'enter:ignore'
-      # Continuous tab completion - cycle through options
-      zstyle ':fzf-tab:*' continuous-trigger 'tab'
+      # Completion configuration
+      autoload -Uz compinit
+      compinit
+
+      # Load menu selection module
+      zmodload zsh/complist
+
+      # Case-insensitive completion
+      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+
+      # Show completion list without cycling/selection
+      setopt NO_AUTO_MENU
+      setopt NO_MENU_COMPLETE
+      setopt AUTO_LIST
+
+      # Include hidden files in completion
+      _comp_options+=(globdots)
+
+      # Group matches and describe
+      zstyle ':completion:*:matches' group 'yes'
+      zstyle ':completion:*:options' description 'yes'
+      zstyle ':completion:*:options' auto-description '%d'
+      zstyle ':completion:*:corrections' format ' %F{red}-- %d (errors: %e) --%f'
+      zstyle ':completion:*:corrections' force-list always
+      zstyle ':completion:*:descriptions' format ' %F{purple}-- %d --%f'
+      zstyle ':completion:*:messages' format ' %F{green} -- %d --%f'
+      zstyle ':completion:*:warnings' format ' %F{yellow}-- no matches found --%f'
+      zstyle ':completion:*' format ' %F{blue}-- %d --%f'
+      zstyle ':completion:*' group-name '''
+      zstyle ':completion:*' verbose yes
+
+      # Use LS_COLORS for file completion
+      zstyle ':completion:*' list-colors ''${(s.:.)LS_COLORS}
+
+      # Multi-column display (top-to-bottom, then left-to-right)
+      zstyle ':completion:*' list-packed yes
+
+      # Show 3 lines per group max
+      zstyle ':completion:*' list-max-items 9
 
       # Aliases
       alias ez='eza -la'
