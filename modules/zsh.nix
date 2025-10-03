@@ -93,7 +93,7 @@
       # Empty prompt enter behavior
       magic-enter() {
         if [[ -z $BUFFER ]]; then
-          LBUFFER="echo && eza -la && if git rev-parse --is-inside-work-tree >/dev/null 2>&1; then echo; echo; git status -s; fi"
+          LBUFFER="eza -lah; git status -sb"
           zle accept-line
         else
           zle accept-line
