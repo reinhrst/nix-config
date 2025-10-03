@@ -70,5 +70,8 @@
     bat
     ripgrep
     dust
+    colima
+    docker
+    act
   ];
 }

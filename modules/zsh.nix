@@ -89,6 +89,7 @@
 
       # Aliases
       alias ez='eza -la'
+      alias act='DOCKER_HOST="$(docker context inspect colima --format "{{(index .Endpoints \"docker\").Host}}")" act'
 
       # Empty prompt enter behavior
       magic-enter() {
