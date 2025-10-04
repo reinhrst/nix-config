@@ -68,7 +68,6 @@
     delta
     jq
     eza
-    bat
     ripgrep
     dust
     colima
