@@ -120,15 +120,12 @@
       magic-enter() {
         if [[ -z $BUFFER ]]; then
           LBUFFER="eza -lah; git status -sb"
-          zle accept-line
+          zle .accept-line
         else
-          zle accept-line
+          zle .accept-line
         fi
       }
-      zle -N magic-enter
-
-      # Bind Enter key to magic-enter function
-      bindkey '^M' magic-enter
+      zle -N accept-line magic-enter
     '';
   };
 }
