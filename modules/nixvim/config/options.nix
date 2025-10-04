@@ -9,8 +9,8 @@
     expandtab = true;
     autoindent = true;
     wrap = false;
-    ignorecase = true;
-    smartcase = true;
+    ignorecase = false;
+    smartcase = false;
     cursorline = true;
     termguicolors = true;
     background = "dark";
