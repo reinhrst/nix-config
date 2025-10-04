@@ -37,17 +37,6 @@
 
     # Environment variables and key bindings
     initContent = ''
-      # Auto-start tmux for interactive shells
-      if [[ -z "$TMUX" ]] && [[ -n "$PS1" ]]; then
-        # If tmux server is running, attach and create new window
-        if tmux has-session 2>/dev/null; then
-          exec tmux new-window -a \; attach
-        else
-          # No tmux server running, create new session
-          exec tmux new-session
-        fi
-      fi
-
       # XDG Base Directory Specification
       export XDG_CONFIG_HOME=''${XDG_CONFIG_HOME:-$HOME/.config}
       export XDG_CACHE_HOME=''${XDG_CACHE_HOME:-$HOME/.cache}

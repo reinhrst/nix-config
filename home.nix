@@ -8,7 +8,6 @@
     ./modules/fzf.nix
     ./modules/starship.nix
     ./modules/atuin.nix
-    ./modules/tmux.nix
   ];
 
   # Allow specific unfree packages
