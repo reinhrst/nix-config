@@ -4,6 +4,7 @@ let
     system = "aarch64-darwin";
     username = "reinoud";
     hostname = "mindy";
+    desktopApps = import ./modules/desktop-apps.nix;
 in
 {
   programs.zsh.enable = true;
@@ -28,4 +29,10 @@ in
 
   # Add zsh to available shells
   environment.shells = [ "/etc/profiles/per-user/${username}/bin/zsh" ];
+
+  # Homebrew configuration
+  homebrew = {
+    enable = true;
+    casks = desktopApps.casks;
+  };
 }
