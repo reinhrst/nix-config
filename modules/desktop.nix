@@ -4,9 +4,6 @@
   # Ghostty configuration
   # (installed via Homebrew in darwin.nix, configured here)
   xdg.configFile."ghostty/config".text = ''
-    # Start a unique tmux session for each tab/pane
-    command = ${pkgs.tmux}/bin/tmux new-session -A -s "ghostty-$(uuidgen)"
-
     # Shell integration
     shell-integration = zsh
 
