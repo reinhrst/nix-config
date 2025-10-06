@@ -31,7 +31,7 @@ in
   environment.shells = [ "/etc/profiles/per-user/${username}/bin/zsh" ];
 
   # Enable Touch ID for sudo
-  security.pam.enableSudoTouchIdAuth = true;
+  security.pam.services.sudo_local.touchIdAuth = true;
 
   # Homebrew configuration
   homebrew = {
