@@ -35,5 +35,8 @@
     window-show-tab-bar = always
     clipboard-paste-protection = true
 
+    # Keybindings
+    keybind = super+z=undo
+
   '';
 }
