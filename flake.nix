@@ -50,6 +50,7 @@
             home.username = username;
             home.homeDirectory = "/Users/${username}";
           })
+          nixvim.homeModules.nixvim
           ./home.nix
         ];
       };
