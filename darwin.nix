@@ -1,8 +1,7 @@
-{ config, pkgs, ... }:
+{ config, ... }:
 
 let
     system = "aarch64-darwin";
-    pkgs = import nixpkgs { inherit system; };
     username = "reinoud";
     hostname = "mindy";
 in
@@ -11,20 +10,22 @@ in
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
-  system.stateVersion=6;
-  system.primaryUser = username;
+  system.stateVersion = 6;
 
   system.defaults.NSGlobalDomain = {
     AppleShowAllExtensions = true;
     KeyRepeat = 2;
     InitialKeyRepeat = 15;
   };
+  system.primaryUser = username;
 
-  # Ensure zsh from Nix profile is available as a valid shell
-  environment.shells = [ "/etc/profiles/per-user/${username}/bin/zsh" ];
+  # Configure user
   users.users.${username} = {
-    home  = "/Users/${username}";
+    name = username;
+    home = "/Users/${username}";
     shell = "/etc/profiles/per-user/${username}/bin/zsh";
   };
-}
 
+  # Add zsh to available shells
+  environment.shells = [ "/etc/profiles/per-user/${username}/bin/zsh" ];
+}

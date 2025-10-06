@@ -1,53 +1,57 @@
 {
-  description = "Home Manager configuration";
+  description = "Reinoud's macOS + Home Manager (single repo)";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
+    darwin.url  = "github:LnL7/nix-darwin";
+    home-manager.url = "github:nix-community/home-manager";
+    nixvim.url = "github:nix-community/nixvim";
 
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # keep everyone on the same nixpkgs
+    darwin.inputs.nixpkgs.follows = "nixpkgs";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { nixpkgs, home-manager, nixvim, ... }:
-    let
-      system = "aarch64-darwin"; # Change to x86_64-darwin if on Intel Mac, or x86_64-linux if on Linux
-      pkgs = nixpkgs.legacyPackages.${system};
+  outputs = { self, nixpkgs, darwin, home-manager, nixvim, ... }:
+  let
+    system = "aarch64-darwin";
+    pkgs = import nixpkgs { inherit system; };
+    username = "reinoud";
+    hostname = "mindy";
+  in {
+    # 1) System config (sudo): `sudo darwin-rebuild switch --flake .#mindy`
+    darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
+      inherit system;
+      modules = [
+        ./darwin.nix
+        home-manager.darwinModules.home-manager
+        {
+          home-manager.useUserPackages = true;
 
-      # Define checks for a given system
-      makeChecks = system: let
-        pkgs = nixpkgs.legacyPackages.${system};
-        hmConfig = home-manager.lib.homeManagerConfiguration {
-          inherit pkgs;
-          modules = [
-            nixvim.homeModules.nixvim
-            ./home.nix
-          ];
-        };
-      in {
-        # Check that the configuration builds
-        build = hmConfig.activationPackage;
-      };
-    in {
-      homeConfigurations."reinoud" = home-manager.lib.homeManagerConfiguration {
+          home-manager.users.${username} = {
+            imports = [
+              nixvim.homeModules.nixvim
+              ./home.nix
+            ];
+          };
+        }
+      ];
+    };
+
+    # 2) User config (no sudo): `home-manager switch --flake .#reinoud@mindy`
+    homeConfigurations."${username}@${hostname}" =
+      home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-
         modules = [
-          nixvim.homeModules.nixvim
+          # Reuse the SAME user module as above
+          ({ config, pkgs, ... }: {
+            # When HM runs standalone, set these explicitly:
+            home.username = username;
+            home.homeDirectory = "/Users/${username}";
+          })
           ./home.nix
         ];
       };
-
-      # Checks for nix flake check
-      checks = {
-        aarch64-darwin = makeChecks "aarch64-darwin";
-        x86_64-linux = makeChecks "x86_64-linux";
-      };
-    };
+  };
 }
