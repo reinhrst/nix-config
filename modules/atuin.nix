@@ -10,7 +10,6 @@
       # Set default filter mode to directory
       filter_mode = "directory";
       filter_mode_shell_up_key_binding = "directory";
-      inline_height = 1;
     };
   };
 
