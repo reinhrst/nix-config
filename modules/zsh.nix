@@ -68,6 +68,10 @@
       # q in vi command mode pushes current line to buffer
       bindkey -M vicmd "q" push-line
 
+      # Load edit-command-line widget (accessible via execute-named-cmd)
+      autoload -Uz edit-command-line
+      zle -N edit-command-line
+
       # Shift+Up/Down for history search with current input
       bindkey '^[[1;2A' history-beginning-search-backward
       bindkey '^[[1;2B' history-beginning-search-forward
