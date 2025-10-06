@@ -30,6 +30,9 @@ in
   # Add zsh to available shells
   environment.shells = [ "/etc/profiles/per-user/${username}/bin/zsh" ];
 
+  # Enable Touch ID for sudo
+  security.pam.enableSudoTouchIdAuth = true;
+
   # Homebrew configuration
   homebrew = {
     enable = true;
