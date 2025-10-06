@@ -33,7 +33,7 @@
     showtabline = 2;
     smartindent = true;
     writebackup = false;
-    mouse = "a";
+    mouse = "";
     guifont = "monospace:h17";
   };
 }
