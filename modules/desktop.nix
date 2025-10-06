@@ -28,9 +28,8 @@
     palette = 14=#9aedfe
     palette = 15=#f0f0f0
 
-    # Add your Ghostty configuration here
-    # Example:
-    # font-family = "JetBrains Mono NL"
-    # font-size = 14
+    # Font configuration
+    font-family = "JetBrainsMono Nerd Font"
+    font-size = 13
   '';
 }

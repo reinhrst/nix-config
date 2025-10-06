@@ -33,6 +33,9 @@
     # Claude Code
     claude-code
 
+    # Fonts
+    nerd-fonts.jetbrains-mono
+
     # Basic Unix utilities
     coreutils      # Basic file, shell and text manipulation utilities
     findutils      # File finding utilities (find, xargs, etc.)
