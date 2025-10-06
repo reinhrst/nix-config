@@ -50,7 +50,7 @@
         src = pkgs.fetchFromGitHub {
           owner = "coder";
           repo = "claudecode.nvim";
-          rev = "main";
+          rev = "v0.3.0";
           sha256 = "sha256-sOBY2y/buInf+SxLwz6uYlUouDULwebY/nmDlbFbGa8=";
         };
       })
