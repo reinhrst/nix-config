@@ -122,7 +122,8 @@
 
       # Empty prompt enter behavior
       magic-enter() {
-        if [[ -z $BUFFER ]]; then
+        # Only trigger magic behavior if buffer is truly empty (no multi-line input)
+        if [[ -z $BUFFER ]] && [[ -z $PREBUFFER ]]; then
           LBUFFER="eza -lah; git status -sb"
           zle .accept-line
         else
