@@ -30,8 +30,11 @@ in
   # Add zsh to available shells
   environment.shells = [ "/etc/profiles/per-user/${username}/bin/zsh" ];
 
-  # Enable Touch ID for sudo
-  security.pam.services.sudo_local.touchIdAuth = true;
+  # Enable Touch ID for sudo (including in tmux)
+  security.pam.services.sudo_local = {
+    touchIdAuth = true;
+    reattach = true;
+  };
 
   # Homebrew configuration
   homebrew = {
