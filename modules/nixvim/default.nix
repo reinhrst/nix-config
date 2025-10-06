@@ -10,9 +10,11 @@
     ./plugins/ui.nix
     ./plugins/git.nix
     ./plugins/misc.nix
+    ./plugins/markdown.nix
     ./config/options.nix
     ./config/keymaps.nix
     ./config/autocmds.nix
+    ./config/lua-functions.nix
   ];
 
   programs.nixvim = {
