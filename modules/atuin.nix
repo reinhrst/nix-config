@@ -7,9 +7,9 @@
     settings = {
       # Disable all default key bindings
       keymap_mode = "emacs";
-      # Set default filter mode to directory
-      filter_mode = "directory";
-      filter_mode_shell_up_key_binding = "directory";
+      # Set default filter mode to global
+      filter_mode = "global";
+      filter_mode_shell_up_key_binding = "global";
     };
   };
 
@@ -22,7 +22,13 @@
     # Only bind Ctrl-R for atuin search
     bindkey '^r' _atuin_search_widget
 
-    # Configure zsh-autosuggestions to use atuin with directory filter
-    ZSH_AUTOSUGGEST_STRATEGY=(atuin)
+    # Custom strategy for directory-scoped atuin suggestions
+    _zsh_autosuggest_strategy_atuin_directory() {
+      typeset -g suggestion
+      suggestion=$(${pkgs.atuin}/bin/atuin search --cwd "$PWD" --cmd-only --limit 1 --search-mode prefix "$1" 2>/dev/null)
+    }
+
+    # Configure zsh-autosuggestions to use directory-scoped atuin
+    ZSH_AUTOSUGGEST_STRATEGY=(atuin_directory)
   '';
 }
