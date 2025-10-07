@@ -41,6 +41,13 @@ in
     show-recents = false;
   };
 
+  system.defaults.trackpad = {
+    Clicking = true;
+    TrackpadRightClick = true;
+  };
+
+  system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 1.0;
+
   system.primaryUser = username;
 
   # Configure user
