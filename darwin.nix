@@ -26,6 +26,10 @@ in
     ShowStatusBar = true;
   };
 
+  system.defaults.dock = {
+    autohide = true;
+  };
+
   system.primaryUser = username;
 
   # Configure user
