@@ -17,7 +17,15 @@ in
     AppleShowAllExtensions = true;
     KeyRepeat = 2;
     InitialKeyRepeat = 15;
+    AppleShowAllFiles = true;
   };
+
+  system.defaults.finder = {
+    AppleShowAllFiles = true;
+    ShowPathbar = true;
+    ShowStatusBar = true;
+  };
+
   system.primaryUser = username;
 
   # Configure user
