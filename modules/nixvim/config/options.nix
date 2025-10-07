@@ -8,7 +8,7 @@
     shiftwidth = 2;
     expandtab = true;
     autoindent = true;
-    wrap = false;
+    wrap = true;
     ignorecase = false;
     smartcase = false;
     cursorline = true;
