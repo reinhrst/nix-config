@@ -19,9 +19,6 @@
     export ATUIN_NOBIND="true"
     eval "$(${pkgs.atuin}/bin/atuin init zsh)"
 
-    # Only bind Ctrl-R for atuin search
-    bindkey '^r' _atuin_search_widget
-
     # Custom strategy for directory-scoped atuin suggestions
     _zsh_autosuggest_strategy_atuin_directory() {
       typeset -g suggestion
@@ -30,5 +27,16 @@
 
     # Configure zsh-autosuggestions to use directory-scoped atuin
     ZSH_AUTOSUGGEST_STRATEGY=(atuin_directory)
+
+    # Wrapper for atuin search that clears autosuggestions
+    _atuin_search_wrapper() {
+      _zsh_autosuggest_clear
+      zle _atuin_search_widget
+      _zsh_autosuggest_fetch
+    }
+    zle -N _atuin_search_wrapper
+
+    # Only bind Ctrl-R for atuin search with wrapper
+    bindkey '^r' _atuin_search_wrapper
   '';
 }
