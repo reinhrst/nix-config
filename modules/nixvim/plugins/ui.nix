@@ -54,5 +54,10 @@
     web-devicons = {
       enable = true;
     };
+
+    # Trouble - diagnostics, references, quickfix
+    trouble = {
+      enable = true;
+    };
   };
 }
