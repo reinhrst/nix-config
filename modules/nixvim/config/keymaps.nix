@@ -374,6 +374,114 @@
       options.desc = "Format buffer";
     }
 
+    # Gitsigns - Navigation
+    {
+      mode = "n";
+      key = "]c";
+      action.__raw = ''
+        function()
+          if vim.wo.diff then
+            vim.cmd.normal({']c', bang = true})
+          else
+            require('gitsigns').nav_hunk('next')
+          end
+        end
+      '';
+      options.desc = "Next git hunk";
+    }
+    {
+      mode = "n";
+      key = "[c";
+      action.__raw = ''
+        function()
+          if vim.wo.diff then
+            vim.cmd.normal({'[c', bang = true})
+          else
+            require('gitsigns').nav_hunk('prev')
+          end
+        end
+      '';
+      options.desc = "Previous git hunk";
+    }
+
+    # Gitsigns - Hunk actions
+    {
+      mode = "n";
+      key = "<leader>hs";
+      action = "<cmd>Gitsigns stage_hunk<cr>";
+      options.desc = "Stage hunk";
+    }
+    {
+      mode = "n";
+      key = "<leader>hr";
+      action = "<cmd>Gitsigns reset_hunk<cr>";
+      options.desc = "Reset hunk";
+    }
+    {
+      mode = "n";
+      key = "<leader>hS";
+      action = "<cmd>Gitsigns stage_buffer<cr>";
+      options.desc = "Stage buffer";
+    }
+    {
+      mode = "n";
+      key = "<leader>hu";
+      action = "<cmd>Gitsigns undo_stage_hunk<cr>";
+      options.desc = "Undo stage hunk";
+    }
+    {
+      mode = "n";
+      key = "<leader>hR";
+      action = "<cmd>Gitsigns reset_buffer<cr>";
+      options.desc = "Reset buffer";
+    }
+    {
+      mode = "n";
+      key = "<leader>hp";
+      action = "<cmd>Gitsigns preview_hunk<cr>";
+      options.desc = "Preview hunk";
+    }
+    {
+      mode = "n";
+      key = "<leader>hb";
+      action = "<cmd>lua require('gitsigns').blame_line{full=true}<cr>";
+      options.desc = "Blame line";
+    }
+    {
+      mode = "n";
+      key = "<leader>hd";
+      action = "<cmd>Gitsigns diffthis<cr>";
+      options.desc = "Diff file";
+    }
+    {
+      mode = "n";
+      key = "<leader>hD";
+      action = "<cmd>lua require('gitsigns').diffthis('~')<cr>";
+      options.desc = "Diff file (cached)";
+    }
+
+    # Gitsigns - Toggles
+    {
+      mode = "n";
+      key = "<leader>tb";
+      action = "<cmd>Gitsigns toggle_current_line_blame<cr>";
+      options.desc = "Toggle line blame";
+    }
+    {
+      mode = "n";
+      key = "<leader>td";
+      action = "<cmd>Gitsigns toggle_deleted<cr>";
+      options.desc = "Toggle deleted";
+    }
+
+    # Gitsigns - Text object
+    {
+      mode = [ "o" "x" ];
+      key = "ih";
+      action = ":<C-U>Gitsigns select_hunk<CR>";
+      options.desc = "Select hunk";
+    }
+
     # System clipboard keymaps
     # Copy to system clipboard
     {
