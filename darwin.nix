@@ -18,6 +18,12 @@ in
     KeyRepeat = 2;
     InitialKeyRepeat = 15;
     AppleShowAllFiles = true;
+    NSAutomaticCapitalizationEnabled = false;
+    NSAutomaticDashSubstitutionEnabled = false;
+    NSAutomaticInlinePredictionEnabled = false;
+    NSAutomaticPeriodSubstitutionEnabled = false;
+    NSAutomaticQuoteSubstitutionEnabled = false;
+    NSAutomaticSpellingCorrectionEnabled = false;
   };
 
   system.defaults.finder = {
