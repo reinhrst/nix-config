@@ -34,6 +34,11 @@ in
 
   system.defaults.dock = {
     autohide = true;
+    persistent-apps = [
+      "/System/Applications/Finder.app"
+      "/Applications/Safari.app"
+    ];
+    show-recents = false;
   };
 
   system.primaryUser = username;
