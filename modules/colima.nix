@@ -27,6 +27,7 @@
       KeepAlive = true;
       EnvironmentVariables = {
         COLIMA_HOME = "${config.xdg.configHome}/colima";
+        PATH = "${pkgs.docker}/bin:/usr/bin:/bin:/usr/sbin:/sbin";
       };
     };
   };
