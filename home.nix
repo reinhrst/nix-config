@@ -29,6 +29,19 @@
   # introduces backwards incompatible changes.
   home.stateVersion = "24.05";
 
+  # Activation scripts
+  home.activation.rebuildZshCompinit = config.lib.dag.entryAfter ["linkGeneration"] ''
+    # Explicitly provide atuin to avoid PATH issues during activation
+    export PATH="${pkgs.atuin}/bin:${pkgs.zsh}/bin:$PATH"
+    ${pkgs.zsh}/bin/zsh -lic "
+    set -euo pipefail
+    rm ''${ZDOTDIR:-$HOME}/.zcompdump
+    compinit
+    zcompile ''${ZDOTDIR:-$HOME}/.zcompdump
+    echo generated compinit files:
+    ls -la ~/.config/zsh/.zcompdump*"
+  '';
+
   # Install packages
   home.packages = with pkgs; [
     # Claude Code

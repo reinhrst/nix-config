@@ -5,6 +5,10 @@
     enable = true;
     defaultKeymap = "viins";
     dotDir = "${config.xdg.configHome}/zsh";
+
+    # Disable home-manager's default compinit since we run it manually in initContent
+    enableCompletion = false;
+
     plugins = [
       {
         name = "zsh-autosuggestions";
@@ -76,9 +80,9 @@
       bindkey '^[[1;2A' history-beginning-search-backward
       bindkey '^[[1;2B' history-beginning-search-forward
 
-      # Completion configuration
+      # Completion configuration -- we never rebuild, rebuilding happens through home-manager
       autoload -Uz compinit
-      compinit
+      compinit -C
 
       # Load menu selection module
       zmodload zsh/complist

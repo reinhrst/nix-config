@@ -7,7 +7,10 @@ let
     desktopApps = import ./modules/desktop-apps.nix;
 in
 {
-  programs.zsh.enable = true;
+  programs.zsh = {
+    enable = true;
+    enableCompletion = false;  # Disable system compinit, we handle it in home-manager
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
