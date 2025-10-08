@@ -54,10 +54,10 @@
       done
 
       # Default applications
-      export BROWSER="''${BROWSER:-open}"
-      export EDITOR="''${EDITOR:-nvim}"
-      export VISUAL="''${VISUAL:-nvim}"
-      export PAGER="''${PAGER:-less}"
+      export BROWSER="open"
+      export EDITOR="nvim"
+      export VISUAL="nvim"
+      export PAGER="less"
 
       # Less configuration
       export LESS="''${LESS:--g -i -M -R -S -w -z-4}"
