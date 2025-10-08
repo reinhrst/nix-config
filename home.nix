@@ -77,4 +77,20 @@
     docker
     act
   ];
+
+  # Colima configuration
+  xdg.configFile."colima/default/colima.yaml".text = ''
+    mounts:
+      - location: /Volumes
+        writable: true
+  '';
+
+  launchd.agents.colima = {
+    enable = true;
+    config = {
+      ProgramArguments = [ "${pkgs.colima}/bin/colima" "start" "--foreground" ];
+      RunAtLoad = true;
+      KeepAlive = true;
+    };
+  };
 }
