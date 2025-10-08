@@ -35,9 +35,10 @@
     export PATH="${pkgs.atuin}/bin:${pkgs.zsh}/bin:$PATH"
     ${pkgs.zsh}/bin/zsh -lic "
     set -euo pipefail
-    rm ''${ZDOTDIR:-$HOME}/.zcompdump
+    rm -f ~/.config/zsh/.zcompdump
     compinit
-    zcompile ''${ZDOTDIR:-$HOME}/.zcompdump
+    zcompile ~/.config/zsh/.zcompdump
+    chmod u-w ~/.config/zsh/.zcompdump*
     echo generated compinit files:
     ls -la ~/.config/zsh/.zcompdump*"
   '';
