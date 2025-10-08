@@ -9,6 +9,7 @@
     ./modules/starship.nix
     ./modules/atuin.nix
     ./modules/desktop.nix
+    ./modules/colima.nix
   ];
 
   # Allow specific unfree packages
@@ -73,24 +74,6 @@
     eza
     ripgrep
     dust
-    colima
-    docker
     act
   ];
-
-  # Colima configuration
-  xdg.configFile."colima/default/colima.yaml".text = ''
-    mounts:
-      - location: /Volumes
-        writable: true
-  '';
-
-  launchd.agents.colima = {
-    enable = true;
-    config = {
-      ProgramArguments = [ "${pkgs.colima}/bin/colima" "start" "--foreground" ];
-      RunAtLoad = true;
-      KeepAlive = true;
-    };
-  };
 }
