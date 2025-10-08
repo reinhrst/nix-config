@@ -35,8 +35,9 @@ in
   system.defaults.dock = {
     autohide = true;
     persistent-apps = [
-      "/System/Applications/Finder.app"
-      "/Applications/Safari.app"
+      # Finder is here by default
+      "/System/Cryptexes/App/System/Applications/Safari.app"
+      "/Applications/Ghostty.app"
     ];
     show-recents = false;
   };
