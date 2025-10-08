@@ -84,7 +84,8 @@
       zmodload zsh/complist
 
       # Case-insensitive completion
-      zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
+      zstyle ':completion:*' matcher-list \
+        'm:{a-z}={A-Z}'
 
       # Show completion list without cycling/selection
       setopt NO_AUTO_MENU
@@ -115,6 +116,7 @@
 
       # Show 3 lines per group max
       zstyle ':completion:*' list-max-items 9
+
 
       # Aliases
       alias ez='eza -la'
