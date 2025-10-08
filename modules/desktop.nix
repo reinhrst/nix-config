@@ -12,6 +12,7 @@
     # Font configuration
     font-family = "JetBrainsMono Nerd Font"
     font-size = 13
+    font-feature = -calt, -liga, -dlig
 
     window-show-tab-bar = always
     clipboard-paste-protection = true
