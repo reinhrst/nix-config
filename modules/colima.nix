@@ -3,6 +3,17 @@
 let
   # Our overrides
   overridesYaml = pkgs.writeText "colima-overrides.yaml" ''
+    arch: aarch64
+    hostname: ""
+    kubernetes:
+      k3sArgs:
+        - --disable=traefik
+    network:
+      dnsHosts: {}
+    vmType: vz
+    mountInotify: true
+    cpuType: ""
+    mountType: virtiofs
     mounts:
       - location: /Volumes/Work
         writable: true
