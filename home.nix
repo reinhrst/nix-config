@@ -8,6 +8,7 @@
     ./modules/fzf.nix
     ./modules/starship.nix
     ./modules/atuin.nix
+    ./modules/git.nix
     ./modules/desktop.nix
     ./modules/colima.nix
   ];
@@ -65,7 +66,6 @@
     less           # Text pager
     curl           # Data transfer tool
     wget           # Network downloader
-    git            # Version control system
 
     # Formatters (for conform.nvim)
     prettier
