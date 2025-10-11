@@ -15,6 +15,7 @@ in
     ./modules/common/starship.nix
     ./modules/common/atuin.nix
     ./modules/common/git.nix
+    ./modules/common/grok-cli.nix
 
     # Desktop-only modules
     ./modules/desktop/desktop.nix
