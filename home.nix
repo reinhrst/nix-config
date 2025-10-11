@@ -1,19 +1,24 @@
 { config, pkgs, ... }:
 
 let
-  desktopApps = import ./modules/desktop-apps.nix { inherit pkgs; };
+  commonPackages = import ./modules/common/packages.nix { inherit pkgs; };
+  desktopFonts = import ./modules/desktop/fonts.nix { inherit pkgs; };
+  desktopApps = import ./modules/desktop/desktop-apps.nix { inherit pkgs; };
 in
 {
   # Import modules
   imports = [
-    ./modules/nixvim
-    ./modules/zsh.nix
-    ./modules/fzf.nix
-    ./modules/starship.nix
-    ./modules/atuin.nix
-    ./modules/git.nix
-    ./modules/desktop.nix
-    ./modules/colima.nix
+    # Common modules (shared with docker)
+    ./modules/common/nixvim
+    ./modules/common/zsh.nix
+    ./modules/common/fzf.nix
+    ./modules/common/starship.nix
+    ./modules/common/atuin.nix
+    ./modules/common/git.nix
+
+    # Desktop-only modules
+    ./modules/desktop/desktop.nix
+    ./modules/desktop/colima.nix
   ];
 
   # Allow specific unfree packages
@@ -48,50 +53,8 @@ in
   '';
 
   # Install packages
-  home.packages = with pkgs; [
-    # Claude Code
-    claude-code
-
-    # Fonts
-    nerd-fonts.jetbrains-mono
-
-    # Basic Unix utilities
-    coreutils      # Basic file, shell and text manipulation utilities
-    findutils      # File finding utilities (find, xargs, etc.)
-    gnused         # Stream editor
-    gnugrep        # Text search utility
-    gawk           # Text processing programming language
-    diffutils      # File comparison utilities
-    gnutar         # Archive utility
-    gzip           # Compression utility
-    which          # Locate a command
-    file           # File type identification
-    less           # Text pager
-    curl           # Data transfer tool
-    wget           # Network downloader
-
-    # Formatters (for conform.nvim)
-    prettier
-    stylua
-    shfmt
-    taplo
-
-    # Linters (for nvim-lint) - only tools without LSP coverage
-    shellcheck
-    hadolint
-
-    # Python formatting (ruff_format used by conform.nvim)
-    ruff
-
-    # Other useful CLI tools
-    fd
-    bat
-    delta
-    jq
-    eza
-    ripgrep
-    dust
-    act
-    gh
-  ] ++ desktopApps.packages;
+  home.packages =
+    commonPackages.packages.desktop
+    ++ desktopFonts.packages
+    ++ desktopApps.packages;
 }

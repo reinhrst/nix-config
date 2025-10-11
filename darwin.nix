@@ -4,7 +4,7 @@ let
     system = "aarch64-darwin";
     username = "reinoud";
     hostname = "mindy";
-    desktopApps = import ./modules/desktop-apps.nix { inherit pkgs; };
+    desktopApps = import ./modules/desktop/desktop-apps.nix { inherit pkgs; };
 in
 {
   programs.zsh = {
