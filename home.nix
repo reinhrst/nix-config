@@ -1,5 +1,8 @@
 { config, pkgs, ... }:
 
+let
+  desktopApps = import ./modules/desktop-apps.nix { inherit pkgs; };
+in
 {
   # Import modules
   imports = [
@@ -89,5 +92,5 @@
     ripgrep
     dust
     act
-  ];
+  ] ++ desktopApps.packages;
 }

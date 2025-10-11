@@ -1,10 +1,10 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 
 let
     system = "aarch64-darwin";
     username = "reinoud";
     hostname = "mindy";
-    desktopApps = import ./modules/desktop-apps.nix;
+    desktopApps = import ./modules/desktop-apps.nix { inherit pkgs; };
 in
 {
   programs.zsh = {
