@@ -92,5 +92,6 @@ in
     ripgrep
     dust
     act
+    gh
   ] ++ desktopApps.packages;
 }
