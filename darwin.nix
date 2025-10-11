@@ -16,6 +16,22 @@ in
   nix.optimise.automatic = true;
   system.stateVersion = 6;
 
+  # Linux builder for aarch64-linux builds
+  nix.linux-builder = {
+    enable = true;
+    ephemeral = true;
+    maxJobs = 4;
+    config = {
+      virtualisation = {
+        darwin-builder = {
+          diskSize = 40 * 1024;
+          memorySize = 8 * 1024;
+        };
+        cores = 6;
+      };
+    };
+  };
+
   system.defaults.NSGlobalDomain = {
     AppleShowAllExtensions = true;
     KeyRepeat = 2;
