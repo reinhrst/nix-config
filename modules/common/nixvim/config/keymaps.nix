@@ -126,6 +126,14 @@
       options.desc = "New File";
     }
 
+    # Diagnostics
+    {
+      mode = "n";
+      key = "<leader>cd";
+      action = "<cmd>lua vim.diagnostic.open_float()<cr>";
+      options.desc = "Show diagnostic at cursor";
+    }
+
     # Trouble
     {
       mode = "n";
