@@ -17,6 +17,7 @@
     window-show-tab-bar = always
     clipboard-paste-protection = true
 
+    undo-timeout = 1m
     # Keybindings
     keybind = super+z=undo
 
