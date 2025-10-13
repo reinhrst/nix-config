@@ -98,6 +98,11 @@
 
             # Enable for non-NixOS Linux systems (sources Nix profile automatically)
             targets.genericLinux.enable = true;
+
+            # Set locale for proper character width calculation
+            home.sessionVariables = {
+              LANG = "C.UTF-8";
+            };
           })
         ];
       };
