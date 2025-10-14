@@ -83,11 +83,12 @@
       # cmd-shift-down: scroll to next prompt
       bind-key -n M-Down copy-mode\; send-keys -X search-forward "❯"
 
-      # cmd-c: copy (in copy mode)
-      bind-key -n M-c copy-mode\; send-keys -X copy-selection-and-cancel
+      # cmd-c: copy to system clipboard (uses yank plugin)
+      bind-key -T copy-mode-vi M-c send-keys -X copy-pipe-and-cancel "pbcopy"
+      bind-key -T copy-mode M-c send-keys -X copy-pipe-and-cancel "pbcopy"
 
-      # cmd-v: paste
-      bind-key -n M-v paste-buffer
+      # cmd-v: paste from system clipboard
+      bind-key -n M-v run-shell "pbpaste | tmux load-buffer - && tmux paste-buffer"
 
       # Typing exits copy mode and scrolls to bottom
       bind-key -T copy-mode-vi v send-keys -X cancel
@@ -100,7 +101,7 @@
         plugin = pkgs.tmuxPlugins.extrakto;
         extraConfig = ''
           # cmd-shift-a: copy last command output
-          bind-key -n M-A run-shell "tmux capture-pane -p -S - | tail -r | sed -n '/❯/,/❯/p' | tail -r | head -n -1 | pbcopy"
+          bind-key -n M-A run-shell "tmux capture-pane -p -S - | tail -r | awk '/❯/{if(found) exit; found=1; next} found' | tail -r | pbcopy"
         '';
       }
     ];
