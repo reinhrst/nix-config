@@ -48,7 +48,7 @@ in
       git_status = {
         style = "bg:${palette.gitStatusBg} fg:${palette.gitStatusFg}";
         conflicted = "\${count}=";
-        stashed = "\${count}$";
+        stashed = "\${count}\\\$";
         staged = "\${count}+";
         modified = "\${count}!";
         renamed = "\${count}»";
