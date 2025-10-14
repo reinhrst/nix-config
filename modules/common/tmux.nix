@@ -16,6 +16,9 @@
     # Enable mouse support
     mouse = true;
 
+    # Minimal delay for escape key (fast for vim, but allows escape sequences)
+    escapeTime = 10;
+
     # Typing scrolls to bottom
     extraConfig = ''
       # Status bar at top with Snazzy theme colors
