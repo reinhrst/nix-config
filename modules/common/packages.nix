@@ -35,6 +35,7 @@
       claude-code
       aider-chat
       ffmpeg-full
+      terminal-notifier
 
       # Formatters (for conform.nvim)
       prettier
