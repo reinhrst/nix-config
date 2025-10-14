@@ -1,6 +1,24 @@
 SHELL := /bin/bash
 
-confirm-and-switch:
+.DEFAULT_GOAL := confirm-and-switch
+
+check-untracked:
+	@UNTRACKED=$$(git ls-files --others --exclude-standard '*.nix'); \
+	if [ -n "$$UNTRACKED" ]; then \
+		echo "Found untracked .nix files:"; \
+		echo "$$UNTRACKED" | sed 's/^/  /'; \
+		echo ""; \
+		read -p "Add these files with --intent-to-add? [y/N] " -n 1 -r; \
+		echo; \
+		if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
+			echo "$$UNTRACKED" | xargs git add --intent-to-add; \
+			echo "Files added with --intent-to-add"; \
+		else \
+			echo "Warning: Builds may fail if these files are referenced"; \
+		fi; \
+	fi
+
+confirm-and-switch: check-untracked
 	@echo "Building configuration..."
 	@nix run nixpkgs#home-manager build -- --flake .#reinoud@mindy
 	@echo ""
@@ -21,5 +39,5 @@ confirm-and-switch:
 		fi; \
 	fi
 
-switch:
+switch: check-untracked
 	nix run nixpkgs#home-manager switch -- --flake .#reinoud@mindy
