@@ -17,10 +17,10 @@
     # Window management (send Option sequences for tmux)
     keybind = super+t=text:\x1bt
     keybind = super+shift+t=text:\x1bT
-    keybind = super+left_bracket=text:\x1b[
-    keybind = super+right_bracket=text:\x1b]
     keybind = super+shift+left_bracket=text:\x1b{
     keybind = super+shift+right_bracket=text:\x1b}
+    keybind = super+shift+left=text:\x1b[1;4D
+    keybind = super+shift+right=text:\x1b[1;4C
 
     # Scrolling
     keybind = super+shift+up=text:\x1b[1;2A

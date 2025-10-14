@@ -34,6 +34,7 @@
 
       # Key bindings (using M- for Option/Alt, which is cmd in Ghostty with proper config)
       # Note: In Ghostty, we'll configure cmd to send Option sequences
+      # IMPORTANT: Any M- keybindings below must be added to modules/desktop/ghostty.nix
 
       # cmd-t: new window in home directory
       bind-key -n M-t new-window -c ~
@@ -41,17 +42,17 @@
       # cmd-shift-t: new window in current directory
       bind-key -n M-T new-window -c "#{pane_current_path}"
 
-      # cmd-[: previous window
-      bind-key -n M-[ previous-window
+      # cmd-{: previous window
+      bind-key -n 'M-{' previous-window
 
-      # cmd-]: next window
-      bind-key -n M-] next-window
+      # cmd-}: next window
+      bind-key -n 'M-}' next-window
 
-      # cmd-shift-[: move window left
-      bind-key -n M-{ swap-window -t -1\; select-window -t -1
+      # cmd-shift-left: move window left
+      bind-key -n M-S-Left swap-window -t -1\; select-window -t -1
 
-      # cmd-shift-]: move window right
-      bind-key -n M-} swap-window -t +1\; select-window -t +1
+      # cmd-shift-right: move window right
+      bind-key -n M-S-Right swap-window -t +1\; select-window -t +1
 
       # cmd-1 through cmd-9: select window
       bind-key -n M-1 select-window -t 1
