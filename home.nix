@@ -16,10 +16,11 @@ in
     ./modules/common/atuin.nix
     ./modules/common/git.nix
     ./modules/common/grok-cli.nix
+    ./modules/common/tmux.nix
 
     # Desktop-only modules
-    ./modules/desktop/desktop.nix
     ./modules/desktop/colima.nix
+    ./modules/desktop/ghostty.nix
   ];
 
   # Allow specific unfree packages

@@ -19,6 +19,9 @@
       curl           # Data transfer tool
       wget           # Network downloader
 
+      # Terminal multiplexer
+      tmux
+
       # Other useful CLI tools
       fd
       bat
