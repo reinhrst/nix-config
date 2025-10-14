@@ -18,16 +18,16 @@
 
     # Typing scrolls to bottom
     extraConfig = ''
-      # Status bar at top with macOS-style appearance
+      # Status bar at top with Snazzy theme colors
       set-option -g status-position top
-      set-option -g status-style "bg=#282a36,fg=#f8f8f2"
+      set-option -g status-style "bg=#282a36,fg=#ff6ac1"
       set-option -g status-left ""
       set-option -g status-right ""
       set-option -g window-status-format " #I:#W "
       set-option -g window-status-current-format " #I:#W "
-      set-option -g window-status-current-style "bg=#44475a,fg=#f8f8f2,bold"
-      set-option -g pane-border-style "fg=#44475a"
-      set-option -g pane-active-border-style "fg=#6272a4"
+      set-option -g window-status-current-style "bg=#282a36,fg=#5af78e,bold"
+      set-option -g pane-border-style "fg=#57c7ff"
+      set-option -g pane-active-border-style "fg=#5af78e"
 
       # Mouse click on status bar to switch windows
       set-option -g mouse on
