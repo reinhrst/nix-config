@@ -33,6 +33,8 @@
     # Development tools
     dev = with pkgs; [
       claude-code
+      aider-chat
+      ffmpeg-full
 
       # Formatters (for conform.nvim)
       prettier
