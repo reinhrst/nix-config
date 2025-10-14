@@ -32,6 +32,18 @@
       # Mouse click on status bar to switch windows
       set-option -g mouse on
 
+      # Mouse selection doesn't auto-copy, stays until cleared (like Ghostty)
+      unbind -T copy-mode MouseDragEnd1Pane
+      unbind -T copy-mode-vi MouseDragEnd1Pane
+
+      # Double-click selects word but doesn't copy
+      bind-key -T root DoubleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-word
+      bind-key -T copy-mode DoubleClick1Pane select-pane \; send-keys -X select-word
+
+      # Triple-click selects line but doesn't copy
+      bind-key -T root TripleClick1Pane select-pane \; copy-mode -M \; send-keys -X select-line
+      bind-key -T copy-mode TripleClick1Pane select-pane \; send-keys -X select-line
+
       # Key bindings (using M- for Option/Alt, which is cmd in Ghostty with proper config)
       # Note: In Ghostty, we'll configure cmd to send Option sequences
       # IMPORTANT: Any M- keybindings below must be added to modules/desktop/ghostty.nix
