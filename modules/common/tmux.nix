@@ -19,8 +19,20 @@
     # Minimal delay for escape key (fast for vim, but allows escape sequences)
     escapeTime = 10;
 
+    # Enable true color support
+    terminal = "tmux-256color";
+
     # Typing scrolls to bottom
     extraConfig = ''
+      # Vi keys in copy mode
+      set-window-option -g mode-keys vi
+
+      # Enable RGB color support
+      set-option -ga terminal-overrides ",*256col*:Tc"
+
+      # Allow cursor shape changes (Ss = set cursor style, Se = reset cursor style)
+      set-option -ga terminal-overrides ',*:Ss=\E[%p1%d q:Se=\E[2 q'
+
       # Status bar at top with Snazzy theme colors
       set-option -g status-position top
       set-option -g status-style "bg=#282a36,fg=#ff6ac1"
@@ -31,6 +43,9 @@
       set-option -g window-status-current-style "bg=#282a36,fg=#5af78e,bold"
       set-option -g pane-border-style "fg=#57c7ff"
       set-option -g pane-active-border-style "fg=#5af78e"
+
+      # Cursor in copy mode (reverse video block)
+      set-option -g mode-style "bg=#f1fa8c,fg=#282a36"
 
       # Mouse click on status bar to switch windows
       set-option -g mouse on
@@ -54,8 +69,8 @@
       # cmd-t: new window in home directory
       bind-key -n M-t new-window -c ~
 
-      # cmd-shift-t: new window in current directory
-      bind-key -n M-T new-window -c "#{pane_current_path}"
+      # cmd-shift-t: new window in current directory (right after current tab)
+      bind-key -n M-T new-window -a -c "#{pane_current_path}"
 
       # cmd-{: previous window
       bind-key -n 'M-{' previous-window

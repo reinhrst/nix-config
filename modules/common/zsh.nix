@@ -77,16 +77,22 @@
       zle -N edit-command-line
 
       # Cursor shape changes for vi mode (requires terminal support, e.g., via tmux overrides)
+      zle-keymap-select() {
+        if [[ $KEYMAP == vicmd ]]; then
+          # Blinking block for command mode
+          echo -ne '\e[1 q'
+        else
+          # Blinking bar for insert mode
+          echo -ne '\e[5 q'
+        fi
+      }
+      zle -N zle-keymap-select
+
       zle-line-init() {
-        # Blinking bar for insert mode
+        # Ensure initial cursor is set for insert mode
         echo -ne '\e[5 q'
       }
-      zle-line-finish() {
-        # Blinking block for command mode
-        echo -ne '\e[1 q'
-      }
-      zle -n zle-line-init
-      zle -n zle-line-finish
+      zle -N zle-line-init
 
       # Shift+Up/Down for history search with current input
       bindkey '^[[1;2A' history-beginning-search-backward
