@@ -12,6 +12,7 @@
     ./plugins/misc.nix
     ./plugins/markdown.nix
     ./plugins/egrepify.nix
+    ./plugins/nui.nix
     ./config/options.nix
     ./config/keymaps.nix
     ./config/autocmds.nix
@@ -43,10 +44,13 @@
             error = " ";
             warn = " ";
             hint = " ";
-            info = " ";
           };
         };
       };
     };
+
+    extraConfigLua = ''
+      vim.api.nvim_set_hl(0, "TelescopePromptCounter", { fg = "#d5c4a1" })
+    '';
   };
 }

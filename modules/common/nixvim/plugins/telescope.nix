@@ -27,13 +27,13 @@
           layout_strategy = "vertical";
           layout_config = {
             vertical = {
-              width = 0.9;
-              height = 0.9;
-              preview_height = 0.7;
-              prompt_position = "top";
-              mirror = true;
+              size = {
+                width = "90%";
+                height = "90%";
+              };
             };
           };
+          create_layout = { __raw = "(function() ${builtins.readFile ../plugins/telescope-fused-layout.lua} end)()"; };
           sorting_strategy = "ascending";
           mappings = {
             i = {

@@ -10,12 +10,12 @@
     extraPlugins = [
       (pkgs.vimUtils.buildVimPlugin {
         pname = "telescope-egrepify";
-        version = "master";
+        version = "5e6fb91f52a595a0dd554c7eea022c467ff80d86";
         src = pkgs.fetchFromGitHub {
           owner = "fdschmidt93";
           repo = "telescope-egrepify.nvim";
-          rev = "master";
-          sha256 = "sha256-Zimdnz+Jpb5eBPDjS6P2fIzJM/CbnQ9qNQFMQ92qrgM="; # Replace with actual sha256 from nix-prefetch-url or similar
+          rev = "5e6fb91f52a595a0dd554c7eea022c467ff80d86";
+          sha256 = "sha256-Zimdnz+Jpb5eBPDjS6P2fIzJM/CbnQ9qNQFMQ92qrgM=";
         };
       })
     ];
