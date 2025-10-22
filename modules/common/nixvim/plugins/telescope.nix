@@ -24,6 +24,25 @@
             "--smart-case"
             "--hidden"
           ];
+          layout_strategy = "vertical";
+          layout_config = {
+            vertical = {
+              width = 0.9;
+              height = 0.9;
+              preview_height = 0.7;
+              prompt_position = "top";
+              mirror = true;
+            };
+          };
+          sorting_strategy = "ascending";
+          mappings = {
+            i = {
+              "<C-p>" = { __raw = "require('telescope.actions.layout').toggle_preview"; };
+            };
+            n = {
+              "<C-p>" = { __raw = "require('telescope.actions.layout').toggle_preview"; };
+            };
+          };
         };
       };
       keymaps = {
@@ -35,13 +54,9 @@
           action = "buffers";
           options.desc = "[b]uffers";
         };
-        "<leader>fA" = {
-          action = "live_grep";
-          options.desc = "rg (regex-search all files)";
-        };
         "<leader>fa" = {
-          action = "grep_string";
-          options.desc = "fzf (fuzzy-search all files)";
+          action = "egrepify";
+          options.desc = "egrepify (enhanced grep with permutations)";
         };
         "<leader>fC" = {
           action = "command_history";

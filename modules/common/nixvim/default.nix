@@ -11,6 +11,7 @@
     ./plugins/git.nix
     ./plugins/misc.nix
     ./plugins/markdown.nix
+    ./plugins/egrepify.nix
     ./config/options.nix
     ./config/keymaps.nix
     ./config/autocmds.nix
