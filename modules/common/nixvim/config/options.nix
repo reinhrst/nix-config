@@ -31,7 +31,6 @@
     pumheight = 10;
     showmode = false;
     showtabline = 2;
-    smartindent = true;
     writebackup = false;
     mouse = "";
     guifont = "monospace:h17";
