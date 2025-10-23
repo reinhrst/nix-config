@@ -98,6 +98,8 @@ in
     keybind = super+seven=text:\x1b7
     keybind = super+eight=text:\x1b8
     keybind = super+nine=text:\x1b9
+
+    keybind = super+enter=text:\x1b\r
   '';
 
   # Add the custom launcher to home.packages (via module output)
