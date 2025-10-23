@@ -14,6 +14,7 @@ in
     ./modules/common/fzf.nix
     ./modules/common/starship.nix
     ./modules/common/atuin.nix
+    ./modules/common/aider-chat.nix
     ./modules/common/git.nix
     ./modules/common/grok-cli.nix
     ./modules/common/tmux.nix

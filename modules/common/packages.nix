@@ -36,7 +36,6 @@
     # Development tools
     dev = with pkgs; [
       claude-code
-      aider-chat
       ffmpeg-full
       terminal-notifier
 

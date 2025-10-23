@@ -142,6 +142,7 @@
 
       # Aliases
       alias ez='eza -la'
+      alias aid='aider --api-key xai="$(security find-generic-password -w -s "x.ai" -a "grok-api")"'
       alias act='DOCKER_HOST="$(docker context inspect colima --format "{{(index .Endpoints \"docker\").Host}}")" act'  # colima support
 
       # Empty prompt enter behavior
