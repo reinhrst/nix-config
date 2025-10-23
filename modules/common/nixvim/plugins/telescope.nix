@@ -9,6 +9,9 @@
         fzf-native = {
           enable = true;
         };
+        undo = {
+          enable = true;
+        };
       };
       settings = {
         defaults = {
