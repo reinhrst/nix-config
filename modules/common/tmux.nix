@@ -4,8 +4,8 @@
   programs.tmux = {
     enable = true;
 
-    # Change leader to Ctrl-a
-    prefix = "C-a";
+    # Change leader to Ctrl-space
+    prefix = "C-space";
 
     # Start window numbering at 1
     baseIndex = 1;
@@ -46,9 +46,6 @@
 
       # Cursor in copy mode (reverse video block)
       set-option -g mode-style "bg=#f1fa8c,fg=#282a36"
-
-      # Mouse click on status bar to switch windows
-      set-option -g mouse on
 
       # Mouse selection doesn't auto-copy, stays until cleared (like Ghostty)
       unbind -T copy-mode MouseDragEnd1Pane
