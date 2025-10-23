@@ -13,6 +13,7 @@
     ./plugins/markdown.nix
     ./plugins/egrepify.nix
     ./plugins/nui.nix
+    ./plugins/telescope-symbols.nix
     ./config/options.nix
     ./config/keymaps.nix
     ./config/autocmds.nix
@@ -43,7 +44,6 @@
           text = {
             error = " ";
             warn = " ";
-            hint = " ";
           };
         };
       };
