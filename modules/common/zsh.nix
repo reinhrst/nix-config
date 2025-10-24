@@ -114,6 +114,9 @@
       setopt NO_MENU_COMPLETE
       setopt AUTO_LIST
 
+      # Ignore single Ctrl-D presses (requires two in a row to trigger EOF)
+      setopt ignoreeof
+
       # Include hidden files in completion
       _comp_options+=(globdots)
 
