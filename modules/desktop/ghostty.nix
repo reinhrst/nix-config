@@ -76,12 +76,14 @@ in
     keybind = super+shift+t=text:\x1bT
     keybind = super+shift+left_bracket=text:\x1b{
     keybind = super+shift+right_bracket=text:\x1b}
-    keybind = super+shift+left=text:\x1b[1;4D
-    keybind = super+shift+right=text:\x1b[1;4C
+    keybind = super+shift+left=text:\x1b[1;7D
+    keybind = super+shift+right=text:\x1b[1;7C
 
     # Scrolling
-    keybind = super+shift+up=text:\x1b[1;2A
-    keybind = super+shift+down=text:\x1b[1;2B
+    keybind = super+up=text:\x1b[1;3A
+    keybind = super+down=text:\x1b[1;3B
+    keybind = super+shift+up=text:\x1b[1;7A
+    keybind = super+shift+down=text:\x1b[1;7B
 
     # Copy/paste
     keybind = super+shift+a=text:\x1bA
