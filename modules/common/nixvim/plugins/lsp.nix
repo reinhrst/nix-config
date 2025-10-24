@@ -127,6 +127,11 @@
           enable = true;
         };
 
+        # Nix
+        nil_ls = {
+          enable = true;
+        };
+
         # Note: Swift sourcekit-lsp may not be available in nixvim yet
       };
     };
