@@ -88,7 +88,6 @@ in
     # Copy/paste
     keybind = super+shift+a=text:\x1bA
     keybind = super+c=text:\x1bc
-    keybind = super+v=text:\x1bv
 
     # Window selection
     keybind = super+one=text:\x1b1
