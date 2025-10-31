@@ -18,6 +18,7 @@ in
     ./modules/common/git.nix
     ./modules/common/grok-cli.nix
     ./modules/common/tmux.nix
+    ./modules/common-config.nix
 
     # Desktop-only modules
     ./modules/desktop/colima.nix
