@@ -23,6 +23,7 @@ in
     # Desktop-only modules
     ./modules/desktop/colima.nix
     ./modules/desktop/ghostty.nix
+    ./modules/desktop/maccy.nix
   ];
 
   # Allow specific unfree packages

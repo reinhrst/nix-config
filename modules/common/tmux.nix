@@ -28,13 +28,28 @@
     # Plugins
     plugins = with pkgs.tmuxPlugins; [
       yank
-      {
-        plugin = pkgs.tmuxPlugins.extrakto;
-        extraConfig = ''
-          # cmd-shift-a: copy last command output
-          bind-key -n M-A run-shell "tmux capture-pane -p -S - | tail -r | awk '/❯/{if(found) exit; found=1; next} found {print}' | tail -r | pbcopy"
-        '';
-      }
+      extrakto
+      fzf-tmux-url
+      (mkTmuxPlugin {
+        pluginName = "tmux-picker";
+        version = "unstable-2019-02-04";
+        src = pkgs.fetchFromGitHub {
+          owner = "pawel-wiejacha";
+          repo = "tmux-picker";
+          rev = "827845f89044fbfb3cd73905f000340bbbda663a";
+          sha256 = "sha256-XXB1XmIYhHzDL4JneH1MS3uUolk+QID21IY9xDuwhQI=";
+        };
+      })
+      (mkTmuxPlugin {
+        pluginName = "tmux-fzf-maccy";
+        version = "unstable-2025-01-07";
+        src = pkgs.fetchFromGitHub {
+          owner = "junegunn";
+          repo = "tmux-fzf-maccy";
+          rev = "6df60d88285178768bc262e2966aeb5e987173d0";
+          sha256 = "sha256-4vgYIgWXBiVz5BUIal45mpUjb1RyT7Imq04N0g4Q+Ss=";
+        };
+      })
     ];
   };
 }
