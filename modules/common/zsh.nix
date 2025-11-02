@@ -37,6 +37,10 @@
           sha256 = "sha256-GFHlZjIHUWwyeVoCpszgn4AmLPSSE8UVNfRmisnhkpg=";
         };
       }
+      {
+        name = "zsh-vi-mode";
+        src = pkgs.zsh-vi-mode;
+      }
     ];
 
     # Environment variables and key bindings
