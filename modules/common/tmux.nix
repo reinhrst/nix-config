@@ -16,9 +16,6 @@
     # Enable mouse support
     mouse = true;
 
-    # Minimal delay for escape key (fast for vim, but allows escape sequences)
-    escapeTime = 0;
-
     # Enable true color support
     terminal = "tmux-256color";
 
@@ -30,6 +27,7 @@
       yank
       extrakto
       fzf-tmux-url
+      sensible
       (mkTmuxPlugin {
         pluginName = "tmux-picker";
         version = "unstable-2019-02-04";
