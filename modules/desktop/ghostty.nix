@@ -62,13 +62,13 @@ in
   # Existing Ghostty configuration (unchanged)
   xdg.configFile."ghostty/config".text = ''
     # Start tmux by default
-    command = ${pkgs.tmux}/bin/tmux new-session -A -s main
+    command = ${pkgs.zsh}/bin/zsh -lc ${pkgs.tmux}/bin/tmux new-session -A -s main
 
     theme = Snazzy
 
     # Font configuration
     font-family = "JetBrainsMono Nerd Font"
-    font-size = 13
+    font-size = 12
     font-feature = -calt, -liga, -dlig
 
     # Window management (send Option sequences for tmux)

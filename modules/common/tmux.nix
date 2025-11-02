@@ -20,7 +20,12 @@
     terminal = "tmux-256color";
 
     # Typing scrolls to bottom
-    extraConfig = builtins.readFile ./tmux.conf;
+    extraConfig = ''
+      set -g default-shell ${pkgs.zsh}/bin/zsh
+      set -g default-command "${pkgs.zsh}/bin/zsh -l"
+
+      ${builtins.readFile ./tmux.conf}
+    '';
 
     # Plugins
     plugins = with pkgs.tmuxPlugins; [
