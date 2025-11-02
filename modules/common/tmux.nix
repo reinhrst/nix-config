@@ -42,6 +42,7 @@
           rev = "827845f89044fbfb3cd73905f000340bbbda663a";
           sha256 = "sha256-XXB1XmIYhHzDL4JneH1MS3uUolk+QID21IY9xDuwhQI=";
         };
+        rtpFilePath = "tmux-picker.tmux";
       })
       (mkTmuxPlugin {
         pluginName = "tmux-fzf-maccy";
@@ -52,6 +53,7 @@
           rev = "6df60d88285178768bc262e2966aeb5e987173d0";
           sha256 = "sha256-4vgYIgWXBiVz5BUIal45mpUjb1RyT7Imq04N0g4Q+Ss=";
         };
+        rtpFilePath = "fzf-maccy.tmux";
       })
     ];
   };
