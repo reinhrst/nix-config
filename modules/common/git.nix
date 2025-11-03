@@ -11,8 +11,8 @@
       c = "commit";
       co = "checkout";
       cp = "cherry-pick";
-      d = "diff --color";
-      dc = "diff --color --cached";
+      d = "!if git rev-parse --is-inside-work-tree &>/dev/null; then git diff --color; else git diff --color 2>&1 | head -n 2 >&2 && false; fi";
+      dc = "!if git rev-parse --is-inside-work-tree &>/dev/null; then git diff --color --cached; else git diff --color --cached 2>&1 | head -n 2 >&2 && false; fi";
       l = "log --pretty=format:'%h %s (%an -- %aI)%n' --decorate --stat --graph --color";
       pom = "push origin master";
       s = "status";
