@@ -40,6 +40,7 @@
       {
         name = "zsh-vi-mode";
         src = pkgs.zsh-vi-mode;
+        file = "share/zsh-vi-mode/zsh-vi-mode.plugin.zsh";
       }
     ];
 
@@ -61,6 +62,7 @@
       export BROWSER="open"
       export EDITOR="nvim"
       export VISUAL="nvim"
+      export ZVM_VI_EDITOR="nvim"
       export PAGER="less"
 
       # Less configuration
