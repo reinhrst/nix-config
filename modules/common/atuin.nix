@@ -36,7 +36,9 @@
     }
     zle -N _atuin_search_wrapper
 
-    # Only bind Ctrl-R for atuin search with wrapper
-    bindkey '^r' _atuin_search_wrapper
+    # Only bind Ctrl-R for atuin search with wrapper -- do so after zvm loads
+    zvm_after_init_commands+=(
+      'bindkey '^r' _atuin_search_wrapper'
+    )
   '';
 }
