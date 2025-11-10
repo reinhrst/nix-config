@@ -116,3 +116,29 @@ magic-enter() {
 }
 zle -N accept-line magic-enter
 
+# Send OSC 133 commands for prompts
+_prompt_executing=""
+function __prompt_precmd() {
+    local ret="$?"
+    if test "$_prompt_executing" != "0"
+    then
+      _PROMPT_SAVE_PS1="$PS1"
+      _PROMPT_SAVE_PS2="$PS2"
+      PS1=$'%{\e]133;A\e\\\\\e]133;P;k=i\e\\%}'$PS1$'%{\e]133;B\e\\\e]122;> \e\\%}'
+      PS2=$'%{\e]133;P;k=s\e\\%}'$PS2$'%{\e]133;B\e\\%}'
+    fi
+    if test "$_prompt_executing" != ""
+    then
+       printf "\033]133;D;%s;\007" "$ret"
+    fi
+    _prompt_executing=0
+}
+function __prompt_preexec() {
+    PS1="$_PROMPT_SAVE_PS1"
+    PS2="$_PROMPT_SAVE_PS2"
+    printf "\e]133;C\e\\"
+    _prompt_executing=1
+}
+preexec_functions+=(__prompt_preexec)
+precmd_functions+=(__prompt_precmd)
+
