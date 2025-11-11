@@ -24,6 +24,7 @@ in
     ./modules/desktop/colima.nix
     ./modules/desktop/ghostty.nix
     ./modules/desktop/maccy.nix
+    ./modules/desktop/hammerspoon.nix
   ];
 
   # Allow specific unfree packages

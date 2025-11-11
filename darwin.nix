@@ -68,6 +68,14 @@ in
 
   system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 1.0;
 
+  system.defaults = {
+    CustomUserPreferences = {
+      "org.hammerspoon.Hammerspoon" = {
+        MJConfigFile = "~/.config/hammerspoon/init.lua";
+      };
+    };
+  };
+
   system.primaryUser = username;
 
   # Configure user

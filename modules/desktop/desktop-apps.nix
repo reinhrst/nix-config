@@ -10,5 +10,6 @@
   # Apps installed via Homebrew (referenced by darwin.nix)
   casks = [
     "ghostty"
+    "hammerspoon"
   ];
 }
