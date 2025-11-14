@@ -1,6 +1,6 @@
 ---@param cond boolean
-local function ternary ( cond , T , F , ...)
-    if cond then return T(...) else return F(...) end
+local function ternary ( cond , T , F)
+    if cond then return T else return F end
 end
 
 ---@param position "left" | "right" | "full"

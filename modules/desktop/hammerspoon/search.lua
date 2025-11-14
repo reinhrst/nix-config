@@ -10,7 +10,7 @@ local DEFAULT_SEARCH_URL = "https://www.google.com/search?q="
 local MAPS_SEARCH_URL    = "https://www.google.com/maps/search/"
 
 local apps     = {}
-local contacts = {}
+local applist     = ""
 local chooser  -- forward-declare
 
 
@@ -30,108 +30,107 @@ end
 -- 1) Build app list using `find`
 ------------------------------------------------------------
 
+local function getAppIcon(appPath)
+  -- Method 1: Try to get icon from Info.plist
+  local infoPlist = appPath .. "/Contents/Info.plist"
+  local cmd = string.format([[/usr/libexec/PlistBuddy -c "Print :CFBundleIconFile" "%s" 2>/dev/null]], infoPlist)
+  local iconName, status = hs.execute(cmd)
+  
+  if iconName and status == true then
+    iconName = iconName:gsub("^%s*(.-)%s*$", "%1")  -- trim whitespace
+    if not iconName:match("%.icns$") then
+      iconName = iconName .. ".icns"
+    end
+    local iconPath = appPath .. "/Contents/Resources/" .. iconName
+    local icon = hs.image.imageFromPath(iconPath)
+    if icon then
+      return icon
+    end
+  end
+  
+  -- Method 2: Fallback - look for any .icns file
+  local cmd2 = string.format([[find "%s/Contents/Resources" -name "*.icns" -maxdepth 1 | head -n 1]], appPath)
+  local icnsPath, status2 = hs.execute(cmd2)
+  if icnsPath and status2 == true then
+    icnsPath = icnsPath:gsub("^%s*(.-)%s*$", "%1")
+    local icon = hs.image.imageFromPath(icnsPath)
+    if icon then
+      return icon
+    end
+  end
+  
+  -- Method 3: Final fallback
+  return hs.image.imageFromAppBundle(appPath)
+end
+
 local function loadApps()
-  -- You can add more paths (~/Applications, /System/Applications, etc.)
-  local cmd = [[find /Applications -maxdepth 2 -name "*.app"]]
-  local out, status = hs.execute(cmd)
+  local searchDirs = {
+    {path = "/Applications", maxdepth = 2},
+    {path = os.getenv("HOME") .. "/Applications", maxdepth = 2},
+    {path = "/System/Applications", maxdepth = 1},
+  }
+  local lines = {}
+  for _, dir in ipairs(searchDirs) do
+    local cmd = string.format([[find "%s" -maxdepth %d -name "*.app" 2>/dev/null]],
+      dir.path, dir.maxdepth)
+    local out, status = hs.execute(cmd)
 
-  if not out or status ~= true then
-    hs.alert.show("App scan failed")
-    return
-  end
-
-  for line in out:gmatch("[^\r\n]+") do
-    local name = line:match("/([^/]+)%.app$")
-    if name then
-      table.insert(apps, {
-        kind = "app",
-        name = name,
-        path = line,
-      })
+    if not out or status ~= true then
+      hs.alert.show(string.format("App scan failed in %s", dir.path))
+      return
     end
-  end
-end
 
-local function filterAppsPrefix(q)
-  local res = {}
-  local qLower = q:lower()
-  for _, app in ipairs(apps) do
-    if app.name:lower():sub(1, #qLower) == qLower then
-      table.insert(res, {
-        text  = app.name,
-        subText = app.path,
-        kind  = "app",
-        app   = app,
-      })
-    end
-  end
-  return res
-end
-
-------------------------------------------------------------
--- 2) Build contacts list from Contacts.app (name/email/phone)
-------------------------------------------------------------
-
-local function loadContacts()
-  local script = [[
-    set outText to ""
-    tell application "Contacts"
-      repeat with p in people
-        set theName to name of p as text
-        set theEmail to ""
-        if (count of emails of p) > 0 then set theEmail to value of first email of p
-        set thePhone to ""
-        if (count of phones of p) > 0 then set thePhone to value of first phone of p
-        set outText to outText & theName & "||" & theEmail & "||" & thePhone & linefeed
-      end repeat
-    end tell
-    return outText
-  ]]
-
-  local ok, result = hs.osascript.applescript(script)
-  if not ok or not result then
-    hs.alert.show(tostring(result))
-    return
-  end
-
-  for line in result:gmatch("[^\r\n]+") do
-    local name, email, phone = line:match("^(.-)%|%|(.-)%|%|(.*)$")
-    if name then
-      table.insert(contacts, {
-        kind  = "contact",
-        name  = name,
-        email = email,
-        phone = phone,
-      })
-    end
-  end
-end
-
-local function filterContactsPrefix(q)
-  local res = {}
-  local qLower = q:lower()
-
-  for _, c in ipairs(contacts) do
-    local fields = { c.name or "", c.email or "", c.phone or "" }
-    for _, f in ipairs(fields) do
-      local fLower = f:lower()
-      if fLower ~= "" and fLower:sub(1, #qLower) == qLower then
-        table.insert(res, {
-          text    = c.name,
-          subText = table.concat({ c.email or "", c.phone or "" }, " "),
-          kind    = "contact",
-          contact = c,
+    for line in out:gmatch("[^\r\n]+") do
+      local name = line:match("/([^/]+)%.app$")
+      if name then
+        table.insert(apps, {
+          kind = "app",
+          name = name,
+          path = line,
+          icon = getAppIcon(line),
         })
-        break
+        table.insert(lines, string.format("%d\t%s", #apps, name))
       end
     end
   end
 
-  return res
+  applist = table.concat(lines, "\n")
+end
+
+local function filterApps(q)
+  local out = ""
+  local task = hs.task.new("/etc/profiles/per-user/reinoud/bin/fzf",
+    function(exitCode, stdoutData, stderrData)
+      out = stdoutData
+    end,
+    {"--filter", q, "--delimiter", "\t", "--with-nth", "2"})
+  task:setInput(applist)
+  task:start()
+  task:waitUntilExit()
+
+  local results = {}
+  for line in out:gmatch("[^\r\n]+") do
+    local index = line:match("^(%d+)")
+    if index then
+      local idx = tonumber(index)
+      local app = apps[idx]
+      if apps[idx] then
+        table.insert(results, {
+          text  = app.name,
+          subText = app.path,
+          kind  = "app",
+          app   = app,
+          image = app.icon,
+        })
+      end
+    end
+  end
+
+  return results
 end
 
 ------------------------------------------------------------
--- 3) Math detection + evaluation
+-- 2) Math detection + evaluation
 ------------------------------------------------------------
 
 local function isMathExpression(q)
@@ -148,7 +147,7 @@ local function evalMathExpression(q)
 end
 
 ------------------------------------------------------------
--- 4) Update chooser based on query
+-- 3) Update chooser based on query
 ------------------------------------------------------------
 
 local function updateChoicesForQuery(rawQuery)
@@ -203,15 +202,13 @@ local function updateChoicesForQuery(rawQuery)
     end
   end
 
-  -- 4d. Apps + contacts prefix search
+  -- 4d. Apps prefix search
   local choices = {}
 
   if q ~= "" then
-    local appChoices      = filterAppsPrefix(q)
-    local contactChoices  = filterContactsPrefix(q)
+    local appChoices      = filterApps(q)
 
     for _, c in ipairs(appChoices) do table.insert(choices, c) end
-    for _, c in ipairs(contactChoices) do table.insert(choices, c) end
   end
 
   -- 4e. Fallback: default web search
@@ -279,7 +276,6 @@ chooser:searchSubText(true)  -- so subText is searchable if you want
 
 -- Pre-load indices (only once, at Hammerspoon reload)
 loadApps()
-loadContacts()
 
 -- Hotkey to show the launcher
 hs.hotkey.bind(launcherHotkeyMods, launcherHotkeyKey, function()
