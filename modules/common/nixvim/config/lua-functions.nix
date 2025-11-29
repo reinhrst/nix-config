@@ -31,6 +31,15 @@
 
       -- Make it globally available
       _G.async_run = M.async_run
+
+      -- Define :AsyncRun user command
+      vim.api.nvim_create_user_command('AsyncRun', function(opts)
+        _G.async_run(opts.args)
+      end, {
+        nargs = 1,  -- Requires exactly one argument (the command)
+        desc = 'Run a command asynchronously',
+      })
+
     '';
   };
 }
