@@ -100,7 +100,8 @@ zstyle ':completion:*' list-max-items 9
 
 
 # Aliases
-alias ez='eza -la'
+alias ez='eza -a --group-directories-first --icons'
+alias ll='eza -lah --group-directories-first --git --icons'
 alias aid='aider --api-key xai="$(security find-generic-password -w -s "x.ai" -a "grok-api")"'
 alias act='DOCKER_HOST="$(docker context inspect colima --format "{{(index .Endpoints \"docker\").Host}}")" act'  # colima support
 
@@ -108,7 +109,7 @@ alias act='DOCKER_HOST="$(docker context inspect colima --format "{{(index .Endp
 magic-enter() {
   # Only trigger magic behavior if buffer is truly empty (no multi-line input)
   if [[ -z $BUFFER ]] && [[ -z $PREBUFFER ]]; then
-    LBUFFER="eza -lah; git status -sb"
+    LBUFFER="eza --group-directories-first -a --icons; git status -sb"
     zle .accept-line
   else
     zle .accept-line
