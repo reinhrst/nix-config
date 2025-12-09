@@ -10,6 +10,7 @@
     ./plugins/ui.nix
     ./plugins/git.nix
     ./plugins/misc.nix
+    ./plugins/toggleterm.nix
     ./plugins/markdown.nix
     ./plugins/egrepify.nix
     ./plugins/nui.nix

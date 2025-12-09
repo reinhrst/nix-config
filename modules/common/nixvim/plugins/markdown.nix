@@ -23,7 +23,7 @@ in
     keymaps = [
       {
         mode = [ "n" "v" "i" ];
-        key = "<C-T>";
+        key = "<C-Y>";
         action = "<cmd>lua require('markdown-link').PasteMarkdownLink()<cr>";
         options.desc = "Paste Markdown Link";
       }
