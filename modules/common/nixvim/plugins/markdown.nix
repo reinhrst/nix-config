@@ -14,6 +14,10 @@ in
 {
   programs.nixvim = {
     extraPlugins = [ markdown-link ];
+    extraConfigLua = ''
+      require("markdown-link").setup({})
+    '';
+
 
     # Keybinding for markdown-link
     keymaps = [
