@@ -11,5 +11,10 @@
     nvim-surround = {
       enable = true;
     };
+
+    # UndoTree
+    undotree = {
+      enable = true;
+    };
   };
 }

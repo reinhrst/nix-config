@@ -550,5 +550,13 @@
       action = "\"+P";
       options.desc = "Paste before from system clipboard";
     }
+
+    # Undotree toggle
+    {
+      mode = "n";
+      key = "<F5>";
+      action = "<cmd>UndotreeToggle<cr>";
+      options.desc = "Toggle Undotree";
+    }
   ];
 }
