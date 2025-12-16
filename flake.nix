@@ -64,7 +64,7 @@
         ];
       };
 
-    # 3) Docker config (aarch64-linux): `docker build -t nix-devtools -f container/Dockerfile .`
+    # 3) Docker config (aarch64-linux): `make build-docker`
     homeConfigurations."${username}@docker" =
       home-manager.lib.homeManagerConfiguration {
         pkgs = linuxPkgs;

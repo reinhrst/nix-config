@@ -29,6 +29,18 @@ let
       > $out
   '';
 
+  overridesYamlBig = pkgs.writeText "colima-overrides.yaml" ''
+    memory: 8
+  '';
+
+  mergedConfigBig = pkgs.runCommand "colima-config.yaml" {} ''
+    ${pkgs.yq-go}/bin/yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
+      ${mergedConfig} \
+      ${overridesYamlBig} \
+      > $out
+  '';
+
+
 in {
   # Install Colima
   home.packages = with pkgs; [
@@ -38,6 +50,7 @@ in {
 
   # Colima configuration
   xdg.configFile."colima/default/colima.yaml".source = mergedConfig;
+  xdg.configFile."colima/big/colima.yaml".source = mergedConfigBig;
 
   launchd.agents.colima = {
     enable = true;

@@ -51,3 +51,6 @@ confirm-and-switch: build-config
 
 switch: build-config
 	$(MAKE) activate-config PROMPT=no
+
+build-docker: check-untracked
+	./build-docker-image.sh
