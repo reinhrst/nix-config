@@ -60,7 +60,7 @@ in
 
   # Install packages
   home.packages =
-    commonPackages.packages.desktop
+    commonPackages.packages.mac
     ++ desktopFonts.packages
     ++ desktopApps.packages;
 }

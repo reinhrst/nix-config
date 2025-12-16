@@ -37,7 +37,6 @@
     dev = with pkgs; [
       claude-code
       ffmpeg-full
-      terminal-notifier
 
       # Formatters (for conform.nvim)
       prettier
@@ -56,10 +55,14 @@
       act
     ];
 
+    mac_only = with pkgs; [
+      terminal-notifier
+    ];
+
     # All packages for docker (cli + dev, no desktop-specific)
     docker = cli ++ dev;
 
     # All packages for desktop (will be combined with desktop-specific packages in home.nix)
-    desktop = docker;
+    mac = cli ++ dev ++ mac_only;
   };
 }
