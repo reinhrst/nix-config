@@ -64,7 +64,7 @@
         ];
       };
 
-    # 3) Docker config (aarch64-linux): `home-manager switch --flake .#reinoud@docker`
+    # 3) Docker config (aarch64-linux): `docker build -t nix-devtools -f container/Dockerfile .`
     homeConfigurations."${username}@docker" =
       home-manager.lib.homeManagerConfiguration {
         pkgs = linuxPkgs;
