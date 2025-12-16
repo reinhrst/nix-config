@@ -62,7 +62,7 @@ in
   # Existing Ghostty configuration (unchanged)
   xdg.configFile."ghostty/config".text = ''
     # Start tmux by default
-    command = ${pkgs.zsh}/bin/zsh -lc ${pkgs.tmux}/bin/tmux new-session -A -s main
+    command = ${pkgs.zsh}/bin/zsh -lc '${pkgs.tmux}/bin/tmux new-session -A -s main'
 
     theme = Snazzy
 
