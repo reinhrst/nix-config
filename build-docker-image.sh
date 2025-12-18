@@ -3,7 +3,9 @@
 set -u  # error on unset vars
 
 PROFILE=big
-CONTEXT=colima-big
+BIG_CONTEXT=colima-big
+DEFAULT_CONTEXT=colima
+SAVE_FILENAME="$HOME/Downloads/nix-devtools.tar"
 
 # 1. Fail if profile is already running
 if colima list --json | nix run nixpkgs#jq -- -se ".[] | select(.name==\"$PROFILE\" and .status==\"Running\")" >/dev/null; then
@@ -21,13 +23,17 @@ fi
 # Ensure stop is attempted exactly once
 stop_rc=0
 cleanup() {
+  test -f "$SAVE_FILENAME" && rm "$SAVE_FILENAME"
   colima stop "$PROFILE"
   stop_rc=$?
 }
 trap cleanup EXIT
 
 # 3. Run docker build; preserve its exit code
-DOCKER_CONTEXT="$CONTEXT" docker build -t nix-devtools -f container/Dockerfile . 
+docker --context="$BIG_CONTEXT" build -t nix-devtools -f container/Dockerfile . &&
+docker --context="$BIG_CONTEXT" save nix-devtools -o "$SAVE_FILENAME" &&
+docker --context="$DEFAULT_CONTEXT" load < "$SAVE_FILENAME"
+
 build_rc=$?
 
 if [ $build_rc -ne 0 ]; then
