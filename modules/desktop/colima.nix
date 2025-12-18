@@ -1,46 +1,43 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
-  # Our overrides
-  overridesYaml = pkgs.writeText "colima-overrides.yaml" ''
-    arch: aarch64
-    hostname: ""
-    kubernetes:
-      k3sArgs:
-        - --disable=traefik
-    network:
-      dnsHosts: {}
-    vmType: vz
-    mountInotify: true
-    cpuType: ""
-    mountType: virtiofs
-    mounts:
-      - location: /Volumes/Work
-        writable: true
-      - location: /tmp/colima
-        writable: true
-  '';
+  makeOverridesYaml = { arch, memory ? null }:
+    let
+      memoryStr = if memory != null then "memory: ${builtins.toString memory}\n" else "";
+    in
+    pkgs.writeText "overrides.yaml" ''
+      arch: ${arch}
+      ${memoryStr}
+      hostname: ""
+      kubernetes:
+        k3sArgs:
+          - --disable=traefik
+      network:
+        dnsHosts: {}
+      vmType: vz
+      mountInotify: true
+      cpuType: ""
+      mountType: virtiofs
+      mounts:
+        - location: /Volumes/Work
+          writable: true
+        - location: /tmp/colima
+          writable: true
+    '';
 
-  # Merge default template with our overrides at build time
-  mergedConfig = pkgs.runCommand "colima-config.yaml" {} ''
+  makeMergedConfig = overridesYaml: pkgs.runCommand "colima-config.yaml" {} ''
     ${pkgs.yq-go}/bin/yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
       ${pkgs.colima.src}/embedded/defaults/colima.yaml \
       ${overridesYaml} \
       > $out
   '';
 
-  overridesYamlBig = pkgs.writeText "colima-overrides.yaml" ''
-    memory: 8
-  '';
-
-  mergedConfigBig = pkgs.runCommand "colima-config.yaml" {} ''
-    ${pkgs.yq-go}/bin/yq eval-all 'select(fileIndex == 0) * select(fileIndex == 1)' \
-      ${mergedConfig} \
-      ${overridesYamlBig} \
-      > $out
-  '';
-
-
+  profiles = {
+    default = { arch = "aarch64"; memory = 2; };
+    big = { arch = "aarch64"; memory = 8; };
+    x86_64 = { arch = "x86_64"; memory = 2; };
+    "x86_64-big" = { arch = "x86_64"; memory = 8; };
+  };
 in {
   # Install Colima
   home.packages = with pkgs; [
@@ -49,8 +46,10 @@ in {
   ];
 
   # Colima configuration
-  xdg.configFile."colima/default/colima.yaml".source = mergedConfig;
-  xdg.configFile."colima/big/colima.yaml".source = mergedConfigBig;
+  xdg.configFile = lib.listToAttrs (lib.mapAttrsToList (name: cfg: {
+    name = "colima/${name}/colima.yaml";
+    value = { source = makeMergedConfig (makeOverridesYaml cfg); };
+  }) profiles);
 
   launchd.agents.colima = {
     enable = true;
