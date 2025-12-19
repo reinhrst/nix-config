@@ -22,11 +22,15 @@ in
       "$schema" = "https://starship.rs/config-schema.json";
       add_newline = true;
 
-      format = "[╭](${palette.border}) $directory[](fg:${palette.directoryBg} bg:${palette.branchBg})$git_branch[](fg:${palette.branchBg} bg:${palette.gitStatusBg})$git_status$git_state$fill $cmd_duration$status[╮](${palette.border}) \n[╰](${palette.border}) $character";
+      format = "[╭](${palette.border}) $directory[](fg:${palette.directoryBg} bg:${palette.branchBg})$git_branch[](fg:${palette.branchBg} bg:${palette.gitStatusBg})$git_status$git_state$nix_shell$fill $cmd_duration$status[╮](${palette.border}) \n[╰](${palette.border}) $character";
 
       right_format = "$time [╯](${palette.border})";
 
       package.disabled = true;
+
+      nix_shell = {
+        symbol = "";
+      };
 
       directory = {
         format = "[$path]($style)[$read_only]($read_only_style)";
