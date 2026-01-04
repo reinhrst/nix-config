@@ -15,6 +15,7 @@
     ./plugins/egrepify.nix
     ./plugins/nui.nix
     ./plugins/telescope-symbols.nix
+    ./plugins/iron.nix
     ./config/options.nix
     ./config/keymaps.nix
     ./config/autocmds.nix
@@ -50,8 +51,10 @@
       };
     };
 
-    extraConfigLua = ''
+    extraConfigLua = lib.mkAfter ''
       vim.api.nvim_set_hl(0, "TelescopePromptCounter", { fg = "#d5c4a1" })
+
+      ${lib.fileContents ./plugins/iron-setup.lua}
     '';
   };
 }
