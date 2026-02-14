@@ -68,6 +68,10 @@ in
 
   system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 1.0;
 
+  system.defaults.loginwindow = {
+    LoginwindowText = "If found, please email mbp@claude.nl";
+  };
+
   system.defaults = {
     CustomUserPreferences = {
       "org.hammerspoon.Hammerspoon" = {
