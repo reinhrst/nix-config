@@ -38,6 +38,9 @@
       claude-code
       ffmpeg-full
 
+      # d2 diagram maker
+      d2
+
       # Formatters (for conform.nvim)
       prettier
       stylua
