@@ -4,6 +4,7 @@
   programs.yazi = {
     enable = true;
     enableZshIntegration = true;
+    shellWrapperName = "yy";
     settings = {
       plugin.prepend_fetchers = [
         {id = "git"; name = "*"; run = "git"; }
