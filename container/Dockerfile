@@ -4,7 +4,7 @@ FROM ubuntu:24.04@sha256:59a458b76b4e8896031cd559576eac7d6cb53a69b38ba819fb26518
 RUN apt-get update && \
     apt-get install -y --no-install-recommends\
         ca-certificates=20240203 \
-        curl=8.5.0-2ubuntu10.6 \
+        curl=8.5.0-2ubuntu10.8 \
         xz-utils=5.6.1+really5.4.5-1ubuntu0.2 \
         git=1:2.43.0-1ubuntu7.3 && \
     rm -rf /var/lib/apt/lists/*
