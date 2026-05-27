@@ -18,7 +18,7 @@
     system = "aarch64-darwin";
     pkgs = import nixpkgs { inherit system; };
     username = "reinoud";
-    hostname = "mindy";
+    hostname = "trc";
 
     # Linux packages for docker
     linuxSystem = "aarch64-linux";
