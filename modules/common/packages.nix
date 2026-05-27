@@ -56,6 +56,7 @@
 
       # Other
       act
+      deno
     ];
 
     mac_only = with pkgs; [
