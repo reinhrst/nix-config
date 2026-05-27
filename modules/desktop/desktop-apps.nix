@@ -11,5 +11,6 @@
   casks = [
     "ghostty"
     "hammerspoon"
+    "blender"
   ];
 }
