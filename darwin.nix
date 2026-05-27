@@ -43,7 +43,14 @@ in
     NSAutomaticPeriodSubstitutionEnabled = false;
     NSAutomaticQuoteSubstitutionEnabled = false;
     NSAutomaticSpellingCorrectionEnabled = false;
+    AppleWindowTabbingMode = "manual";
   };
+  system.defaults.controlcenter.Display = true;
+
+  system.keyboard = {
+  enableKeyMapping = true;
+  remapCapsLockToEscape = true;
+};
 
   system.defaults.finder = {
     AppleShowAllFiles = true;
