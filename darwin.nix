@@ -3,7 +3,7 @@
 let
     system = "aarch64-darwin";
     username = "reinoud";
-    hostname = "mindy";
+    hostname = "trc";
     desktopApps = import ./modules/desktop/desktop-apps.nix { inherit pkgs; };
 in
 {
@@ -15,6 +15,7 @@ in
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.optimise.automatic = true;
   system.stateVersion = 6;
+  networking.hostName = hostname;
 
   # Linux builder for aarch64-linux builds
   nix.linux-builder = {
@@ -46,6 +47,7 @@ in
     AppleWindowTabbingMode = "manual";
   };
   system.defaults.controlcenter.Display = true;
+  system.defaults.controlcenter.Bluetooth = true;
 
   system.keyboard = {
   enableKeyMapping = true;
@@ -72,6 +74,8 @@ in
     Clicking = true;
     TrackpadRightClick = true;
   };
+
+  system.defaults.NSGlobalDomain."com.apple.keyboard.fnState" = true;
 
   system.defaults.NSGlobalDomain."com.apple.trackpad.scaling" = 1.0;
 

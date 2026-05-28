@@ -20,11 +20,11 @@ check-untracked:
 
 build-config: check-untracked
 	@echo "Building configuration..."
-	@nix run nixpkgs#home-manager build -- --flake .#reinoud@mindy --show-trace
+	@nix run nixpkgs#home-manager build -- --flake .#reinoud@trc --show-trace
 	@echo ""
 
 activate-config:
-	@CURRENT_GEN=$$(nix run nixpkgs#home-manager generations -- --flake .#reinoud@mindy | head -1 | awk '{print $$7}'); \
+	@CURRENT_GEN=$$(nix run nixpkgs#home-manager generations -- --flake .#reinoud@trc | head -1 | awk '{print $$7}'); \
 	RESULT_PATH=$$(readlink -f ./result); \
 	if [ "$$(readlink -f $$CURRENT_GEN)" = "$$RESULT_PATH" ]; then \
 		echo "No changes detected."; \

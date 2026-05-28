@@ -29,7 +29,7 @@
       ];
     };
   in {
-    # 1) System config (sudo): `sudo darwin-rebuild switch --flake .#mindy`
+    # 1) System config (sudo): `sudo darwin-rebuild switch --flake .#trc`
     darwinConfigurations.${hostname} = darwin.lib.darwinSystem {
       inherit system;
       modules = [
@@ -48,7 +48,7 @@
       ];
     };
 
-    # 2) User config (no sudo): `home-manager switch --flake .#reinoud@mindy`
+    # 2) User config (no sudo): `home-manager switch --flake .#reinoud@trc`
     homeConfigurations."${username}@${hostname}" =
       home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
