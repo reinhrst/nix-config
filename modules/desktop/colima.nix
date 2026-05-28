@@ -33,10 +33,10 @@ let
   '';
 
   profiles = {
-    default = { arch = "aarch64"; memory = 2; };
-    big = { arch = "aarch64"; memory = 8; };
-    x86_64 = { arch = "x86_64"; memory = 2; };
-    "x86_64-big" = { arch = "x86_64"; memory = 8; };
+    default = { arch = "aarch64"; memory = 8; };
+    big = { arch = "aarch64"; memory = 16; };
+    x86_64 = { arch = "x86_64"; memory = 8; };
+    "x86_64-big" = { arch = "x86_64"; memory = 16; };
   };
 in {
   # Install Colima
