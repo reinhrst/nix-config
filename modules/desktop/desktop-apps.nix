@@ -12,5 +12,6 @@
     "ghostty"
     "hammerspoon"
     "blender"
+    "orbstack"
   ];
 }

@@ -14,14 +14,12 @@ in
     ./modules/common/fzf.nix
     ./modules/common/starship.nix
     ./modules/common/atuin.nix
-    # ./modules/common/aider-chat.nix -- broke (2026-03-31)
     ./modules/common/git.nix
     ./modules/common/tmux.nix
     ./modules/common/yazi.nix
     ./modules/common-config.nix
 
     # Desktop-only modules
-    ./modules/desktop/colima.nix
     ./modules/desktop/ghostty.nix
     ./modules/desktop/maccy.nix
     ./modules/desktop/hammerspoon.nix
