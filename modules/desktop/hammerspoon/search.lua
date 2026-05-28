@@ -67,6 +67,7 @@ local function loadApps()
   local searchDirs = {
     {path = "/Applications", maxdepth = 2},
     {path = os.getenv("HOME") .. "/Applications", maxdepth = 2},
+    {path = os.getenv("HOME") .. "/.nix-profile/Applications", maxdepth = 2},
     {path = "/System/Applications", maxdepth = 1},
   }
   local lines = {}
