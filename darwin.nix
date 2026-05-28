@@ -91,6 +91,14 @@ in
     };
   };
 
+  # switch cmd-shift-3 (and 4) with the ctrl-shift-cmd one
+  system.defaults.CustomUserPreferences."com.apple.symbolichotkeys".AppleSymbolicHotKeys = {
+  "28" = { enabled = true; value = { type = "standard"; parameters = [ 51 20 1441792 ]; }; };  # screen→file: ctrl+shift+cmd+3
+  "29" = { enabled = true; value = { type = "standard"; parameters = [ 51 20 1179648 ]; }; };  # screen→clip: shift+cmd+3
+  "30" = { enabled = true; value = { type = "standard"; parameters = [ 52 21 1441792 ]; }; };  # sel→file:    ctrl+shift+cmd+4
+  "31" = { enabled = true; value = { type = "standard"; parameters = [ 52 21 1179648 ]; }; };  # sel→clip:    shift+cmd+4
+};
+
   system.primaryUser = username;
 
   # Configure user
