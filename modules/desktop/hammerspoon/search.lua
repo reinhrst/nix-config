@@ -67,12 +67,11 @@ local function loadApps()
   local searchDirs = {
     {path = "/Applications", maxdepth = 2},
     {path = os.getenv("HOME") .. "/Applications", maxdepth = 2},
-    {path = os.getenv("HOME") .. "/.nix-profile/Applications", maxdepth = 2},
     {path = "/System/Applications", maxdepth = 1},
   }
   local lines = {}
   for _, dir in ipairs(searchDirs) do
-    local cmd = string.format([[find -H "%s" -maxdepth %d -name "*.app" 2>/dev/null]],
+    local cmd = string.format([[find -L "%s" -maxdepth %d -name "*.app" 2>/dev/null]],
       dir.path, dir.maxdepth)
     local out, status = hs.execute(cmd)
 
