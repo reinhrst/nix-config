@@ -13,5 +13,6 @@
     "hammerspoon"
     "blender"
     "orbstack"
+    "obsidian"
   ];
 }
