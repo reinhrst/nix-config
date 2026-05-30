@@ -7,6 +7,7 @@ let
     desktopApps = import ./modules/desktop/desktop-apps.nix { inherit pkgs; };
 in
 {
+  imports = [ ./modules/desktop/tailscale.nix ];
   programs.zsh = {
     enable = true;
     enableCompletion = false;  # Disable system compinit, we handle it in home-manager
