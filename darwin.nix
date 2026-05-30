@@ -49,6 +49,8 @@ in
   };
   system.defaults.controlcenter.Display = true;
   system.defaults.controlcenter.Bluetooth = true;
+  system.defaults.controlcenter.NowPlaying = false;
+  system.defaults.controlcenter.Sound = false;
 
   system.keyboard = {
   enableKeyMapping = true;
