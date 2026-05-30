@@ -72,7 +72,7 @@ local function loadApps()
   }
   local lines = {}
   for _, dir in ipairs(searchDirs) do
-    local cmd = string.format([[find "%s" -maxdepth %d -name "*.app" 2>/dev/null]],
+    local cmd = string.format([[find -H "%s" -maxdepth %d -name "*.app" 2>/dev/null]],
       dir.path, dir.maxdepth)
     local out, status = hs.execute(cmd)
 
