@@ -14,5 +14,6 @@
     "blender"
     "orbstack"
     "obsidian"
+    "inkscape"
   ];
 }
