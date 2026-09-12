@@ -122,5 +122,6 @@ in
   homebrew = {
     enable = true;
     casks = desktopApps.casks;
+    onActivation = desktopApps.onActivation;
   };
 }

@@ -16,4 +16,9 @@
     "obsidian"
     "inkscape"
   ];
+  onActivation = {
+    autoUpdate = true;   # brew update on darwin-rebuild switch
+    upgrade = true;      # brew upgrade on switch
+    cleanup = "zap";     # remove anything not declared (optional)
+  };
 }
