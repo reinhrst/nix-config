@@ -54,3 +54,9 @@ switch: build-config
 
 build-docker: check-untracked
 	./build-docker-image.sh
+
+update:
+	./update-nixpackages.sh
+
+update-even-if-locked-version-is-old:
+	MAX_AGE_H=$$((24*365)) ./update-nixpackages.sh
