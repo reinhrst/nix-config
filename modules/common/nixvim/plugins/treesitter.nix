@@ -5,12 +5,12 @@
     # Treesitter
     treesitter = {
       enable = true;
+      indent = {
+        enable = true;
+        disable = [ "python" ];
+      };
       settings = {
         highlight.enable = true;
-        indent = {
-          enable = true;
-          disable = [ "python" ];
-        };
         # Disable auto install - let nixvim handle it
         auto_install = false;
         incremental_selection = {

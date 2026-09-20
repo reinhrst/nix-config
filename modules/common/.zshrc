@@ -100,8 +100,8 @@ zstyle ':completion:*' list-max-items 9
 
 
 # Aliases
-alias ez='eza -a --group-directories-first --icons'
-alias ll='eza -lah --group-directories-first --git --icons'
+alias ez='eza -a --group-directories-first --icons auto'
+alias ll='eza -lah --group-directories-first --git --icons auto'
 alias aid='aider --api-key xai="$(security find-generic-password -w -s "x.ai" -a "grok-api")"'
 alias act='DOCKER_HOST="$(docker context inspect colima --format "{{(index .Endpoints \"docker\").Host}}")" act'  # colima support
 
