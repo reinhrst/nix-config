@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# scripts/sync-nixvim.sh
+# This script updates nixvim to the latest version, and then updates nixpkgs to the version that is pinned by nixvim.
+# It checks if the nixpkgs is not too old.
 set -euo pipefail
 MAX_AGE_H=${MAX_AGE_H:-168}
 
@@ -31,4 +32,4 @@ mv flake.lock.tmp flake.lock
 
 nix flake metadata . >/dev/null   # sanity check that the lock is valid
 rm flake.lock.bak
-echo "nixvim $nv_rev → nixpkgs $rev (${age_h}h old)"
+echo "nixvim $nv_rev follows nixpkgs $rev (${age_h}h old). These versions are now in flake.lock"
