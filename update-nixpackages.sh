@@ -32,5 +32,6 @@ jq --arg n "$np_node" --argjson l "$(jq '.locked | del(.__final)' <<<"$np")" \
 mv flake.lock.tmp flake.lock
 
 nix flake metadata . >/dev/null   # sanity check that the lock is valid
+nix flake check --no-build        # ensure the whole flake still evaluates; the ERR trap restores flake.lock on failure
 rm flake.lock.bak
 echo "nixvim $nv_rev follows nixpkgs $rev (${age_h}h old). These versions are now in flake.lock"
