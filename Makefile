@@ -35,9 +35,8 @@ activate-config:
 			read -p "Apply these changes? [y/N] " -n 1 -r; echo; \
 			[[ $$REPLY =~ ^[Yy]$$ ]] || { echo "Cancelled."; exit 0; }; \
 		fi; \
-		echo "Activating..."; \
-		sudo nix-env -p /nix/var/nix/profiles/system --set $$RESULT_PATH && \
-		sudo $$RESULT_PATH/activate; \
+		echo "Activating (darwin-rebuild switch, rolls back on failure)..."; \
+		sudo darwin-rebuild switch --flake .#trc; \
 	fi
 
 confirm-and-switch: build-config
