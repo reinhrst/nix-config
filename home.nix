@@ -3,7 +3,6 @@
 let
   commonPackages = import ./modules/common/packages.nix { inherit pkgs; };
   desktopFonts = import ./modules/desktop/fonts.nix { inherit pkgs; };
-  desktopApps = import ./modules/desktop/desktop-apps.nix { inherit pkgs; };
   allowUnfree = import ./modules/allow-unfree.nix;
 in
 {
@@ -55,6 +54,5 @@ in
   # Install packages
   home.packages =
     commonPackages.packages.mac
-    ++ desktopFonts.packages
-    ++ desktopApps.packages;
+    ++ desktopFonts.packages;
 }
