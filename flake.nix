@@ -65,15 +65,11 @@
 
             programs.home-manager.enable = true;
 
-            # Import only common modules (no desktop)
+            # Import only common modules (no desktop), see modules/common/default.nix
             imports = [
               nixvim.homeModules.nixvim
-              ./modules/common/nixvim
-              ./modules/common/zsh.nix
-              ./modules/common/fzf.nix
-              ./modules/common/starship.nix
-              ./modules/common/atuin.nix
-              ./modules/common/git.nix
+              ./modules/common
+              # docker-only extra
               ./modules/common/grok-cli.nix
             ];
 

@@ -8,13 +8,10 @@ in
 {
   # Import modules
   imports = [
-    # Common modules (shared with docker)
-    ./modules/common/nixvim
-    ./modules/common/zsh.nix
-    ./modules/common/fzf.nix
-    ./modules/common/starship.nix
-    ./modules/common/atuin.nix
-    ./modules/common/git.nix
+    # Common modules (shared with docker, see modules/common/default.nix)
+    ./modules/common
+
+    # macOS-only modules
     ./modules/common/tmux.nix
     ./modules/common/yazi.nix
     ./modules/common-config.nix
