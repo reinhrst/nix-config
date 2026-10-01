@@ -15,6 +15,7 @@
     "orbstack"
     "obsidian"
     "inkscape"
+    "prusaslicer"
   ];
   onActivation = {
     autoUpdate = true;   # brew update on darwin-rebuild switch
