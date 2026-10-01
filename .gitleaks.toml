@@ -1,0 +1,12 @@
+# Gitleaks configuration — https://github.com/gitleaks/gitleaks
+#
+# History is currently clean (verified over all commits). This file exists so
+# future false positives can be silenced with *targeted* allowlist entries —
+# never by disabling rules wholesale.
+title = "nix-config gitleaks"
+
+[allowlist]
+description = "Files that legitimately contain secret-like placeholders"
+paths = [
+  '''\.env\.example$''',
+]

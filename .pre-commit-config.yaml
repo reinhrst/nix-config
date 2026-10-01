@@ -1,0 +1,7 @@
+# Optional local hooks. Enable with:  pre-commit install
+# CI already runs the same gitleaks scan; this just gives faster local feedback.
+repos:
+  - repo: https://github.com/gitleaks/gitleaks
+    rev: v8.30.1
+    hooks:
+      - id: gitleaks

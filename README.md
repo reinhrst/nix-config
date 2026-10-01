@@ -8,5 +8,14 @@ In order to install:
 
 For everyday updates, run `make`
 
+## Secrets
+
+This repo is public, so **never commit real secrets**. The config is secret-free
+today. If you ever need to store credentials (API keys, atuin sync key, etc.):
+
+- Use [sops-nix](https://github.com/Mic92/sops-nix) or [agenix](https://github.com/ryantm/agenix) to manage them encrypted in the tree.
+- A `gitleaks` scan runs on every push/PR (`.github/workflows/secrets.yml`, config in `.gitleaks.toml`) and can be run locally with `pre-commit install` + `git commit`, or ad hoc via `nix run nixpkgs#gitleaks -- detect`.
+- Silence a false positive with a targeted `[allowlist]` entry — never by disabling a rule.
+
 [1]: https://github.com/nix-darwin/nix-darwin
 [2]: https://discourse.nixos.org/t/how-to-set-desired-shell-with-nix-darwin/49826
