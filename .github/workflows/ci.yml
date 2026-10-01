@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  flake:
+    name: Flake check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v30
+        with:
+          extra_nix_config: |
+            accept-flake-config = true
+      # Casks + the darwin system can't be built on Linux, so we validate the
+      # flake structure and that every config evaluates, without building.
+      - name: nix flake check
+        run: nix flake check --no-build
+      - name: nix flake show
+        run: nix flake show --all-systems
+
+  lint:
+    name: Lint (advisory)
+    runs-on: ubuntu-latest
+    # deadnix/statix flag the standard `{ config, lib, pkgs, ... }` module
+    # signature as "unused", so keep this advisory until the config is clean.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+      - uses: cachix/install-nix-action@v30
+      - name: deadnix
+        run: nix run nixpkgs#deadnix -- .
+      - name: statix
+        run: nix run nixpkgs#statix -- check .
