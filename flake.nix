@@ -48,23 +48,7 @@
       ];
     };
 
-    # 2) User config (no sudo): `home-manager switch --flake .#reinoud@trc`
-    homeConfigurations."${username}@${hostname}" =
-      home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        modules = [
-          # Reuse the SAME user module as above
-          ({ config, pkgs, ... }: {
-            # When HM runs standalone, set these explicitly:
-            home.username = username;
-            home.homeDirectory = "/Users/${username}";
-          })
-          nixvim.homeModules.nixvim
-          ./home.nix
-        ];
-      };
-
-    # 3) Docker config (aarch64-linux): `make build-docker`
+    # 2) Docker config (aarch64-linux): `make build-docker`
     homeConfigurations."${username}@docker" =
       home-manager.lib.homeManagerConfiguration {
         pkgs = linuxPkgs;

@@ -20,33 +20,28 @@ check-untracked:
 
 build-config: check-untracked
 	@echo "Building configuration..."
-	@nix run nixpkgs#home-manager build -- --flake .#reinoud@trc --show-trace
+	@darwin-rebuild build --flake .#trc --show-trace
 	@echo ""
 
 activate-config:
-	@CURRENT_GEN=$$(nix run nixpkgs#home-manager generations -- --flake .#reinoud@trc | head -1 | awk '{print $$7}'); \
-	RESULT_PATH=$$(readlink -f ./result); \
-	if [ "$$(readlink -f $$CURRENT_GEN)" = "$$RESULT_PATH" ]; then \
+	@RESULT_PATH=$$(readlink -f ./result); \
+	if [ "$$(readlink -f /run/current-system)" = "$$RESULT_PATH" ]; then \
 		echo "No changes detected."; \
 	else \
 		echo "Changes:"; \
-		nix run nixpkgs#nvd -- diff $$CURRENT_GEN $$RESULT_PATH || true; \
+		nix run nixpkgs#nvd -- diff /run/current-system $$RESULT_PATH || true; \
 		echo ""; \
 		if [ "$(PROMPT)" = "yes" ]; then \
-			read -p "Apply these changes? [y/N] " -n 1 -r; \
-			echo; \
-			if [[ $$REPLY =~ ^[Yy]$$ ]]; then \
-				echo "Activating..."; \
-				$$RESULT_PATH/activate; \
-			else \
-				echo "Cancelled."; \
-			fi; \
-		else \
-			$$RESULT_PATH/activate; \
+			read -p "Apply these changes? [y/N] " -n 1 -r; echo; \
+			[[ $$REPLY =~ ^[Yy]$$ ]] || { echo "Cancelled."; exit 0; }; \
 		fi; \
+		echo "Activating..."; \
+		sudo nix-env -p /nix/var/nix/profiles/system --set $$RESULT_PATH && \
+		sudo $$RESULT_PATH/activate; \
 	fi
 
 confirm-and-switch: build-config
+
 	$(MAKE) activate-config PROMPT=yes
 
 switch: build-config

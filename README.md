@@ -6,7 +6,7 @@ In order to install:
 - Clone this repo and run: `sudo darwin-rebuild switch --flake .#trc` (or, first time: `sudo nix --extra-experimental-features 'nix-command flakes' run nix-darwin/master#darwin-rebuild -- switch --flake .#trc`)
 - I [seems like nix-darwin cannot set default shell yet][2], so do so manually: `chsh -s /etc/profiles/per-user/reinoud/bin/zsh`
 
-For everyday updates, run `home-manager switch --flake .#reinoud@trc`
+For everyday updates, run `make`
 
 [1]: https://github.com/nix-darwin/nix-darwin
 [2]: https://discourse.nixos.org/t/how-to-set-desired-shell-with-nix-darwin/49826

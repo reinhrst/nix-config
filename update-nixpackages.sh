@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 # This script updates nixvim to the latest version, and then updates nixpkgs to the version that is pinned by nixvim.
+# It also updates home-manager and darwin
 # It checks if the nixpkgs is not too old.
 set -euo pipefail
 MAX_AGE_H=${MAX_AGE_H:-168}
@@ -7,7 +8,7 @@ MAX_AGE_H=${MAX_AGE_H:-168}
 cp flake.lock flake.lock.bak
 trap 'mv flake.lock.bak flake.lock; echo "Restored flake.lock" >&2' ERR
 
-nix flake update nixvim
+nix flake update nixvim darwin home-manager
 
 nv_node=$(jq -r '.nodes.root.inputs.nixvim' flake.lock)
 nv_rev=$(jq -r --arg n "$nv_node" '.nodes[$n].locked.rev' flake.lock)
