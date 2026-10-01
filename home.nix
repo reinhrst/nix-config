@@ -4,6 +4,7 @@ let
   commonPackages = import ./modules/common/packages.nix { inherit pkgs; };
   desktopFonts = import ./modules/desktop/fonts.nix { inherit pkgs; };
   desktopApps = import ./modules/desktop/desktop-apps.nix { inherit pkgs; };
+  allowUnfree = import ./modules/allow-unfree.nix;
 in
 {
   # Import modules
@@ -22,10 +23,8 @@ in
     ./modules/desktop/hammerspoon.nix
   ];
 
-  # Allow specific unfree packages
-  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-    "claude-code"
-  ];
+  # Allow specific unfree packages (see modules/allow-unfree.nix)
+  nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) allowUnfree;
 
   # Let Home Manager install and manage itself
   programs.home-manager.enable = true;

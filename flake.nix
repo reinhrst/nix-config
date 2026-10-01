@@ -20,13 +20,14 @@
     username = "reinoud";
     hostname = "trc";
 
+    # Single source of truth for permitted unfree packages
+    allowUnfree = import ./modules/allow-unfree.nix;
+
     # Linux packages for docker
     linuxSystem = "aarch64-linux";
     linuxPkgs = import nixpkgs {
       system = linuxSystem;
-      config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) [
-        "claude-code"
-      ];
+      config.allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) allowUnfree;
     };
   in {
     # 1) System config (sudo): `sudo darwin-rebuild switch --flake .#trc`
@@ -58,10 +59,8 @@
             home.homeDirectory = "/home/${username}";
             home.stateVersion = "24.05";
 
-            # Allow specific unfree packages
-            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) [
-              "claude-code"
-            ];
+            # Allow specific unfree packages (see modules/allow-unfree.nix)
+            nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (pkgs.lib.getName pkg) allowUnfree;
 
             programs.home-manager.enable = true;
 
