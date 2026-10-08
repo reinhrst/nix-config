@@ -14,6 +14,7 @@
       gnutar         # Archive utility
       gzip           # Compression utility
       which          # Locate a command
+      watch          # Repeatedly run a command printing its output
       file           # File type identification
       less           # Text pager
       curl           # Data transfer tool
