@@ -46,7 +46,7 @@
 
     # Environment variables and key bindings
     initContent = ''
-      ${builtins.readFile ./.zshrc}
+      ${builtins.readFile ./zshrc}
     '';
   };
 }
